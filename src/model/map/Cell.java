@@ -1,23 +1,50 @@
 package model.map;
 
+import model.Position;
 import model.elements.Element;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+
+import static view.ErrorView.textError;
 
 /**
  * Created by Mathieu on 10/01/2017.
  */
 public class Cell {
 
-    private List<Element> elements;
+    private ArrayList<Element> elements;
+    private Position position;
+
+
 
     public Cell() {
     }
 
-    public Cell(List<Element> elements) {
-        this.elements = elements;
+    public Cell(Position position){
+        this.position = position;
+        elements = new ArrayList<Element>();
     }
+
+    public Cell(ArrayList<Element> elements) {
+        this.elements = new ArrayList<Element>();
+    }
+
+
+    public void addElement (Element element){
+        elements.add(element);
+    }
+
+    public void deleteElement(Element element){
+        try{
+            elements.remove(element);
+        }
+        catch (Exception e){
+            textError("Tried to remove a non-existent element from a cell.");
+        }
+    }
+
+
 
 
     public boolean isObstacle(){
@@ -51,11 +78,19 @@ public class Cell {
     }
 
 
-    public List<Element> getElements() {
+    public ArrayList<Element> getElements() {
         return elements;
     }
 
-    public void setElements(List<Element> elements) {
+    public void setElements(ArrayList<Element> elements) {
         this.elements = elements;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }
