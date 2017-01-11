@@ -3,7 +3,6 @@ package model.map;
 import model.Position;
 import model.elements.Element;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import static view.ErrorView.textError;
@@ -13,7 +12,9 @@ import static view.ErrorView.textError;
  */
 public class Cell {
 
-    private ArrayList<Element> elements;
+
+
+    private ElementList elements;
     private Position position;
 
 
@@ -23,11 +24,11 @@ public class Cell {
 
     public Cell(Position position){
         this.position = position;
-        elements = new ArrayList<Element>();
+        elements = new ElementList();
     }
 
-    public Cell(ArrayList<Element> elements) {
-        this.elements = new ArrayList<Element>();
+    public Cell(ElementList elements) {
+        this.elements = new ElementList();
     }
 
 
@@ -78,11 +79,12 @@ public class Cell {
     }
 
 
-    public ArrayList<Element> getElements() {
+    public ElementList getElements() {
         return elements;
     }
 
-    public void setElements(ArrayList<Element> elements) {
+
+    public void setElements(ElementList elements) {
         this.elements = elements;
     }
 
