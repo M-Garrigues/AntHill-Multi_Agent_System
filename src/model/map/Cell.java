@@ -49,31 +49,37 @@ public class Cell {
 
 
     public boolean isObstacle(){
-        return containsElement("Obstacle");
+        return containsElement("model.elements.Obstacle");
     }
 
     public boolean isAntHill(){
-        return containsElement("AntHill");
+        return containsElement("model.elements.AntHill");
     }
 
     public boolean isSource(){
-        return containsElement("Source");
+        return containsElement("model.elements.Source");
     }
 
     public boolean hasPheromone(){
-        return containsElement("Pheromone");
+        return containsElement("model.elements.Pheromone");
     }
 
     public boolean hasAnt(){
-        return containsElement("Ant");
+        return containsElement("agent.Ant");
     }
 
 
     private boolean containsElement(String name){
         boolean test = false;
+
+        String testName;
+
         for(Iterator<Element> i = elements.iterator(); i.hasNext();){
-            if(i.next().getClass().getName() == name) test = true;
+            testName = i.next().getClass().getName();
+            System.out.println(testName);
+            if(testName == name) test = true;
         }
+        System.out.println("======");
         if (test) return true;
         else return false;
     }
