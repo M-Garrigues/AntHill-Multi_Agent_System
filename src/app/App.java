@@ -20,10 +20,10 @@ public class App {
 
 
         Map map = new Map(10,10);
-        map.genMap(map);
-        map.printMap(map);
+        //map.genMap(map);
+        //map.printMap(map);
 
-/*
+
         Position pos = new Position(0,1);
         Position pos2 = new Position(1,1);
         Cell cell = new Cell(pos);
@@ -43,8 +43,8 @@ public class App {
         cell.addElement(pheromone);
         cell.addElement(antHill);
         cell2.addElement(obstacle);
-*/
-/*
+
+
         if(cell.isSource())System.out.println("Est bien source");
         if(cell.isAntHill())System.out.println("Est bien fourmilliere");
         if(cell.hasPheromone())System.out.println("Est bien pheromone");
@@ -54,7 +54,7 @@ public class App {
         if(!cell2.hasPheromone())System.out.println("n'est pas pheromone");
         if(!cell.isObstacle())System.out.println("n'est pas obstacle");
         System.out.println(cell.getElements().getClass().getName());
-*/
+
 
 
 

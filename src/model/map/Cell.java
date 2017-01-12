@@ -5,7 +5,6 @@ import model.elements.Element;
 import model.elements.ElementType;
 
 import java.util.EnumMap;
-import java.util.Map;
 
 import static view.ErrorView.textError;
 
@@ -16,34 +15,35 @@ public class Cell {
 
 
 
-    private java.util.Map<ElementType, ElementList> elements;
+    private EnumMap<ElementType, ElementList> elements;
     private Position position;
 
 
     public Cell() {
         position = new Position(0,0);
-        elements = new EnumMap<ElementType, ElementList>(ElementType.class);
+        elements = new EnumMap<>(ElementType.class);
         initialize(elements);
     }
 
     public Cell(Position position) {
         this.position = position;
-        elements = new EnumMap<ElementType, ElementList>(ElementType.class);
+        elements = new EnumMap<>(ElementType.class);
         initialize(elements);
     }
 
-    private static void initialize(java.util.Map<ElementType, ElementList> elements) {
+    private static void initialize(EnumMap<ElementType, ElementList> elements) {
         for (ElementType type : ElementType.values()) {
             elements.put(type, new ElementList());
         }
     }
 
     public void addElement(Element element){
-        String className = new String (element.getClass().getName());
+        String className;
+        className = new String (element.getClass().getName());
 
         className = className.substring(className.lastIndexOf(".") + 1);
 
-        elements.get(className).add(element);
+        this.elements.get(ElementType.AntHill).add(element);
     }
 
 
@@ -51,26 +51,26 @@ public class Cell {
 
 
     public boolean isObstacle(){
-        return(!elements.get("Obstacle").isEmpty());
+        return(!elements.get(ElementType.Obstacle).isEmpty());
     }
 
     public boolean isSource(){
-        return(!elements.get("Source").isEmpty());
+        return(!elements.get(ElementType.Source).isEmpty());
     }
 
     public boolean isAntHill(){
-        return(!elements.get("AntHill").isEmpty());
+        return(!elements.get(ElementType.AntHill).isEmpty());
     }
 
     public boolean hasPheromone(){
-        return(!elements.get("Pheromone").isEmpty());
+        return(!elements.get(ElementType.Pheromone).isEmpty());
     }
 
 
 
     public Element getPheromone(){
         try{
-            return elements.get("Pheromone").get(0);
+            return elements.get(ElementType.Pheromone).get(0);
         }
         catch(Exception e){
             textError("get pheromone on empty cell.");
@@ -83,11 +83,11 @@ public class Cell {
 
 
 
-    public java.util.Map<ElementType, ElementList> getElements() {
+    public EnumMap<ElementType, ElementList> getElements() {
         return elements;
     }
 
-    public void setElements(Map<ElementType, ElementList> elements) {
+    public void setElements(EnumMap<ElementType, ElementList> elements) {
         this.elements = elements;
     }
 
