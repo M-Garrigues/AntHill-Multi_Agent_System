@@ -1,5 +1,8 @@
 package model.map;
 
+import model.Position;
+import model.elements.Obstacle;
+
 import java.util.ArrayList;
 
 /**
@@ -23,8 +26,31 @@ public class Map {
         this.cells = new ArrayList<Cell>();
     }
 
+    public Map genMap (Map map){
+        for (int i = 0; i < map.sizeX ; i++){
+            for (int j = 0; j < map.sizeY ; i++){
+                Position newPos = new Position (i,j);
+                if ((i == 0) || (i == map.sizeX) || (j == 0) || (j == map.sizeY)){
+                    Cell newCell = new Cell (newPos);
+                    Obstacle newObstacle = new Obstacle (newPos);
+                    newCell.addElement(newObstacle);
+                    map.cells.add(newCell);
+                }
+                else {
+                    Cell newCell = new Cell (newPos);
+                    map.cells.add(newCell);
+                }
+            }
+        }
+        return map;
+    }
 
-
+    public void printMap (Map map){
+        int numberCells = map.sizeX * map.sizeY;
+        for (int i = 0 ; i < numberCells ; i++) {
+            System.out.println("Position :" + map.cells.get(i).getPosition());
+        }
+    }
 
 
 
