@@ -4,7 +4,10 @@ import model.Position;
 import model.elements.Element;
 import model.elements.ElementType;
 
+import java.util.EnumMap;
 import java.util.Map;
+
+import static view.ErrorView.textError;
 
 /**
  * Created by Mathieu on 10/01/2017.
@@ -19,11 +22,13 @@ public class Cell {
 
     public Cell() {
         position = new Position(0,0);
+        elements = new EnumMap<ElementType, ElementList>;
         initialize(elements);
     }
 
     public Cell(Position position) {
         this.position = position;
+        elements = new EnumMap<ElementType, ElementList>;
         initialize(elements);
     }
 
@@ -45,7 +50,33 @@ public class Cell {
 
 
 
+    public boolean isObstacle(){
+        return(!elements.get("Obstacle").isEmpty());
+    }
 
+    public boolean isSource(){
+        return(!elements.get("Source").isEmpty());
+    }
+
+    public boolean isAntHill(){
+        return(!elements.get("AntHill").isEmpty());
+    }
+
+    public boolean hasPheromone(){
+        return(!elements.get("Pheromone").isEmpty());
+    }
+
+
+
+    public Element getPheromone(){
+        try{
+            return elements.get("Pheromone").get(0);
+        }
+        catch(Exception e){
+            textError("get pheromone on empty cell.");
+        }
+        return null;
+    }
 
 
 

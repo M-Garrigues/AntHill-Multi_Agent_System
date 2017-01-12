@@ -19,6 +19,14 @@ public class ElementList {
         this.elements = elements;
     }
 
+    public boolean isEmpty(){
+        return elements.isEmpty();
+    }
+
+    public Element get(int i){
+        return elements.get(i);
+    }
+
 
 
 
