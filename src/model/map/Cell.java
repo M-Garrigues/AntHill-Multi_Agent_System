@@ -14,7 +14,7 @@ public class Cell {
 
 
 
-    private ElementList elements;
+    private Map<> elements;
     private Position position;
 
 
