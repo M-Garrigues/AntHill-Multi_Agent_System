@@ -8,20 +8,30 @@ import model.elements.Source;
 import model.map.Cell;
 import model.map.Map;
 
+import java.io.File;
+
 /**
  * Created by Mathieu on 10/01/2017.
  */
 public class App {
     public static void main(String[] args)
     {
-        Settings settings = new Settings();
+       Settings settings = new Settings();
 
         System.out.printf("hello anthill");
 
 
         Map map = new Map(10,10);
-        map.genMap(map);
-        map.printMap(map);
+
+       /* map.genMap(map);
+        map.printMap(map);*/
+
+        map.readFile();
+
+        /*File newfile =  new File("data/map/aaa.txt");
+        System.out.println(newfile.getAbsolutePath());
+        System.out.println(newfile.getPath());*/
+
 
 /*
         Position pos = new Position(0,1);
