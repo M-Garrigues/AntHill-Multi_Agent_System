@@ -22,13 +22,13 @@ public class Cell {
 
     public Cell() {
         position = new Position(0,0);
-        elements = new EnumMap<ElementType, ElementList>;
+        elements = new EnumMap<ElementType, ElementList>(ElementType.class);
         initialize(elements);
     }
 
     public Cell(Position position) {
         this.position = position;
-        elements = new EnumMap<ElementType, ElementList>;
+        elements = new EnumMap<ElementType, ElementList>(ElementType.class);
         initialize(elements);
     }
 
