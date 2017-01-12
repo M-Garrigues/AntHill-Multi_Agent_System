@@ -3,6 +3,10 @@ package model.map;
 import model.Position;
 import model.elements.Obstacle;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -43,6 +47,23 @@ public class Map {
             }
         }
         return map;
+    }
+
+    public void readFile (){
+        String filename = "data/map/map.txt";
+        FileReader fileReader;
+        BufferedReader bufferReader;
+        String currentLine;
+        try {
+            fileReader = new FileReader(filename);
+            bufferReader = new BufferedReader(fileReader);
+
+            while ((currentLine = bufferReader.readLine()) != null) {
+                System.out.println(currentLine);
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void printMap (Map map){
