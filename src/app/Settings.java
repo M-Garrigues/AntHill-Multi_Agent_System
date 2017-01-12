@@ -1,20 +1,22 @@
 package app;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Coded by Mathieu GARRIGUES on 11/01/2017.
  */
 public class Settings {
 
-    private int mapSizeX = 10;
-    private int mapSizeY = 10;
+    private int mapSizeX;
+    private int mapSizeY;
 
-    private int nbSources = 3;
-    private int foodStackMin = 5;
-    private int foodStackMax = 20;
+    private int nbSources;
+    private int foodStackMin;
+    private int foodStackMax;
 
-    private int nbObstacles = 15;
-
-    private int nbAnts = 10;
+    private int nbAnts;
 
 
 
@@ -22,6 +24,43 @@ public class Settings {
 
 
     public Settings(){}
+
+    public void readFile (){
+        //Reading from file map
+        //Line 1 : map size X
+        //Line 2 : map size Y
+        //Line 3 : number of supply on the map
+        //Line 4 : number of ants
+        //Line 5 : minimum food supply on a source
+        //Line 6 : maximum food supply on a source
+
+        String filename = "data/map/map.txt";
+        FileReader fileReader;
+        BufferedReader bufferReader;
+        String currentLine;
+        int counter = 0;
+        int value;
+        try {
+            fileReader = new FileReader(filename);
+            bufferReader = new BufferedReader(fileReader);
+
+            while ((currentLine = bufferReader.readLine()) != null) {
+                value =  Integer.parseInt(currentLine);
+                switch (counter){
+                    case 0 : this.mapSizeX = value;
+                    case 1 : this.mapSizeY = value;
+                    case 2 : this.nbSources = value;
+                    case 3 : this.nbAnts = value;
+                    case 4 : this.foodStackMin = value;
+                    case 5 : this.foodStackMax = value;
+                }
+                System.out.println(currentLine);
+                counter += 1;
+           }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
 
     public int getMapSizeX() {
@@ -62,14 +101,6 @@ public class Settings {
 
     public void setFoodStackMax(int foodStackMax) {
         this.foodStackMax = foodStackMax;
-    }
-
-    public int getNbObstacles() {
-        return nbObstacles;
-    }
-
-    public void setNbObstacles(int nbObstacles) {
-        this.nbObstacles = nbObstacles;
     }
 
     public int getNbAnts() {

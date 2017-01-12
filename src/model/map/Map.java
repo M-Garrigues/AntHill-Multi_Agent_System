@@ -32,7 +32,7 @@ public class Map {
 
     public Map genMap (Map map){
         for (int i = 0; i < map.sizeX ; i++){
-            for (int j = 0; j < map.sizeY ; i++){
+            for (int j = 0; j < map.sizeY ; j++){
                 Position newPos = new Position (i,j);
                 if ((i == 0) || (i == map.sizeX) || (j == 0) || (j == map.sizeY)){
                     Cell newCell = new Cell (newPos);
@@ -47,23 +47,6 @@ public class Map {
             }
         }
         return map;
-    }
-
-    public void readFile (){
-        String filename = "data/map/map.txt";
-        FileReader fileReader;
-        BufferedReader bufferReader;
-        String currentLine;
-        try {
-            fileReader = new FileReader(filename);
-            bufferReader = new BufferedReader(fileReader);
-
-            while ((currentLine = bufferReader.readLine()) != null) {
-                System.out.println(currentLine);
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
     public void printMap (Map map){

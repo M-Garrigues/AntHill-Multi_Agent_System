@@ -19,9 +19,12 @@ public class App {
         System.out.printf("hello anthill");
 
 
+        settings.readFile();
+/*
+
         Map map = new Map(10,10);
-        //map.genMap(map);
-        //map.printMap(map);
+        map.genMap(map);
+        map.printMap(map);
 
 
         Position pos = new Position(0,1);
@@ -54,7 +57,7 @@ public class App {
         if(!cell2.hasPheromone())System.out.println("n'est pas pheromone");
         if(!cell.isObstacle())System.out.println("n'est pas obstacle");
         System.out.println(cell.getElements().getClass().getName());
-
+*/
 
 
 
