@@ -43,7 +43,8 @@ public class Cell {
 
         className = className.substring(className.lastIndexOf(".") + 1);
 
-        this.elements.get(ElementType.AntHill).add(element);
+        ElementType keyElement = ElementType.valueOf(className);
+        this.elements.get(keyElement).add(element);
     }
 
 

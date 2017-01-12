@@ -8,7 +8,19 @@ public enum ElementType {
     AntHill,
     Obstacle,
     Pheromone,
-    Source
+    Source;
     //Ant;
 
+
+
+    /*public static ElementType fromString(String text) {
+        if (text != null) {
+            for (ElementType b : ElementType.values()) {
+                if (b.valueOf()substring(b.lastIndexOf(".") + 1)) {
+                    return b;
+                }
+            }
+        }
+        return null;
+    }*/
 }
