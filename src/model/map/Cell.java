@@ -1,11 +1,9 @@
 package model.map;
 
 import model.Position;
-import model.elements.Element;
+import model.elements.ElementType;
 
-import java.util.Iterator;
-
-import static view.ErrorView.textError;
+import java.util.Map;
 
 /**
  * Created by Mathieu on 10/01/2017.
@@ -14,83 +12,40 @@ public class Cell {
 
 
 
-    private Map<> elements;
+    private java.util.Map<ElementType, ElementList> elements;
     private Position position;
-
 
 
     public Cell() {
     }
 
-    public Cell(Position position){
+    public Cell(Position position) {
         this.position = position;
-        elements = new ElementList();
+        initialize(elements);
     }
 
-    public Cell(ElementList elements) {
-        this.elements = new ElementList();
-    }
-
-
-    public void addElement (Element element){
-        elements.add(element);
-    }
-
-    public void deleteElement(Element element){
-        try{
-            elements.remove(element);
+    private static void initialize(java.util.Map<ElementType, ElementList> elements){
+        for(ElementType type : ElementType.values()){
+            elements.put(type, new ElementList());
         }
-        catch (Exception e){
-            textError("Tried to remove a non-existent element from a cell.");
-        }
+
     }
 
 
 
 
-    public boolean isObstacle(){
-        return containsElement("model.elements.Obstacle");
-    }
-
-    public boolean isAntHill(){
-        return containsElement("model.elements.AntHill");
-    }
-
-    public boolean isSource(){
-        return containsElement("model.elements.Source");
-    }
-
-    public boolean hasPheromone(){
-        return containsElement("model.elements.Pheromone");
-    }
-
-    public boolean hasAnt(){
-        return containsElement("agent.Ant");
-    }
 
 
-    private boolean containsElement(String name){
-        boolean test = false;
-
-        String testName;
-
-        for(Iterator<Element> i = elements.iterator(); i.hasNext();){
-            testName = i.next().getClass().getName();
-            System.out.println(testName);
-            if(testName == name) test = true;
-        }
-        System.out.println("======");
-        if (test) return true;
-        else return false;
-    }
 
 
-    public ElementList getElements() {
+
+
+
+    public java.util.Map<ElementType, ElementList> getElements() {
         return elements;
     }
 
-
-    public void setElements(ElementList elements) {
+    public void setElements(Map<ElementType, ElementList> elements) {
         this.elements = elements;
     }
 
@@ -101,4 +56,7 @@ public class Cell {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+
+
 }
