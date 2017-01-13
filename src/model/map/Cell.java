@@ -38,6 +38,11 @@ public class Cell {
     }
 
     public void addElement(Element element){
+
+        /* This function gets the element's class name, and uses it to find is associated enum (valueOf(className) ).
+        Once done, it adds the element to its specified ElementList.*/
+
+
         String className;
         className = new String (element.getClass().getName());
 
@@ -45,8 +50,8 @@ public class Cell {
 
         ElementType keyElement = ElementType.valueOf(className);
         this.elements.get(keyElement).add(element);
-    }
 
+    }
 
 
 
