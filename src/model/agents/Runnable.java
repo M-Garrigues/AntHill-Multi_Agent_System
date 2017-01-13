@@ -5,5 +5,5 @@ package model.agents;
  */
 public interface Runnable {
 
-    public void run(){}
+    public void run();
 }

@@ -14,12 +14,14 @@ import model.map.Map;
 public class App {
     public static void main(String[] args)
     {
-        Settings settings = new Settings();
+        int randomnum = 1 + (int)(Math.random() * 8);
+        System.out.println(randomnum);
+       /* Settings settings = new Settings();
 
         System.out.printf("hello anthill");
 
 
-        settings.readFile();
+        settings.readFile();*/
 /*
 
         Map map = new Map(10,10);

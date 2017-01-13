@@ -50,7 +50,13 @@ public class Cell {
 
         ElementType keyElement = ElementType.valueOf(className);
         this.elements.get(keyElement).add(element);
+    }
 
+    public boolean isEmpty (){
+        if (this.elements.isEmpty()){
+            return true;
+        }
+        else return false;
     }
 
 
