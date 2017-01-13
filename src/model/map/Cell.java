@@ -41,22 +41,17 @@ public class Cell {
 
         /* This function gets the element's class name, and uses it to find is associated enum (valueOf(className) ).
         Once done, it adds the element to its specified ElementList.*/
-
-
         String className;
-        className = new String (element.getClass().getName());
-
-        className = className.substring(className.lastIndexOf(".") + 1);
-
-        ElementType keyElement = ElementType.valueOf(className);
+        className = ElementType.getClassName(element);
+        ElementType keyElement = ElementType.fromString(className);
         this.elements.get(keyElement).add(element);
     }
 
-    public boolean isEmpty (){
-        if (this.elements.isEmpty()){
-            return true;
-        }
-        else return false;
+    public void printCell (){
+        System.out.println("Position X : " + this.position.getX() + " Position Y : "+ this.position.getY());
+        System.out.println("Anthill : " + this.elements.get(ElementType.AntHill).isEmpty());
+        System.out.println("Obstacle : " + this.elements.get(ElementType.Obstacle).isEmpty());
+        System.out.println("Source : " + this.elements.get(ElementType.Source).isEmpty());
     }
 
 

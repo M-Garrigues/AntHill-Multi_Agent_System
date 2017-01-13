@@ -33,27 +33,27 @@ public class Map {
         this.cells = new ArrayList<Cell>();
     }
 
-    public Map genMap (Map map, Settings settings){
-        map.sizeX = settings.getMapSizeX();
-        map.sizeY = settings.getMapSizeY();
+    public void genMap (Settings settings){
+        this.sizeX = settings.getMapSizeX();
+        this.sizeY = settings.getMapSizeY();
 
         //Initializing every cell from the map
-        for (int i = 0; i < map.sizeX ; i++){
-            for (int j = 0; j < map.sizeY ; j++){
+        for (int i = 0; i < this.sizeX ; i++){
+            for (int j = 0; j < this.sizeY ; j++){
                 Position newPos = new Position (i,j);
                 Cell newCell = new Cell (newPos);
-                if ((i == 0) || (i == map.sizeX) || (j == 0) || (j == map.sizeY)){
+                if ((i == 0) || (i == this.sizeX) || (j == 0) || (j == this.sizeY)){
                     Obstacle newObstacle = new Obstacle (newPos);
                     newCell.addElement(newObstacle);
                 }
-                map.cells.add(newCell);
+                this.cells.add(newCell);
             }
         }
 
         // Adding Anthill to the map
         Position posAntHill;
-        int posXAntHill = 1 + (int)(Math.random() * (map.sizeX-2));
-        int posYAntHill = 1 + (int)(Math.random() * (map.sizeY-2));
+        int posXAntHill = 1 + (int)(Math.random() * (this.sizeX-2));
+        int posYAntHill = 1 + (int)(Math.random() * (this.sizeY-2));
         posAntHill = new Position(posXAntHill,posYAntHill);
         Cell cellAntHill;
         cellAntHill = getCellPosition(posAntHill);
@@ -64,19 +64,19 @@ public class Map {
         for (int i = 0; i < settings.getNbSources(); i++){
             addSourceMap(settings);
         }
-
-        return map;
     }
 
     public void addSourceMap (Settings settings){
             Position posSource;
             Cell cellSource;
+            int posXSource,posYSource;
             do {
-                int posXSource = 1 + (int) (Math.random() * (settings.getMapSizeX() - 2));
-                int posYSource = 1 + (int) (Math.random() * (settings.getMapSizeY() - 2));
+                posXSource = 1 + (int) (Math.random() * (settings.getMapSizeX() - 2));
+                posYSource = 1 + (int) (Math.random() * (settings.getMapSizeY() - 2));
                 posSource = new Position(posXSource,posYSource);
                 cellSource = getCellPosition(posSource);
             }while (cellSource == null);
+            System.out.println("Position de la source : " + posXSource + " , " + posYSource);
             int foodStack = settings.getFoodStackMin() + (int)(Math.random() * (settings.getFoodStackMax()));
 
 
@@ -86,9 +86,9 @@ public class Map {
 
 
     public void printMap (){
-        int numberCells = this.sizeX * this.sizeY;
-        for (int i = 0 ; i < numberCells ; i++) {
-            System.out.println("Position :" + this.cells.get(i).getPosition());
+        int sizeTab = this.sizeX*this.sizeY;
+        for (int i=0; i < sizeTab; i++){
+            this.cells.get(i).printCell();
         }
     }
     

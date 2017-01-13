@@ -14,7 +14,25 @@ import model.map.Map;
 public class App {
     public static void main(String[] args)
     {
-        int randomnum = 1 + (int)(Math.random() * 8);
+
+        //Main test map + settings
+        Settings set = new Settings();
+        Map newMap = new Map(2,2);
+        set.readFile();
+        newMap.genMap(set);
+        newMap.printMap();
+
+        //Main test addElement
+        /*Position position = new Position(1,1);
+        Source source = new Source(position,true,20);
+        Cell cell = new Cell (position);
+        cell.addElement(source);
+        cell.printCell();*/
+
+
+
+
+        /*int randomnum = 1 + (int)(Math.random() * 8);
         System.out.println(randomnum);
        /* Settings settings = new Settings();
 

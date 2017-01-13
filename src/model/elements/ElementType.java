@@ -1,5 +1,7 @@
 package model.elements;
 
+import static view.ErrorView.textError;
+
 /**
  * Coded by Mathieu GARRIGUES on 12/01/2017.
  */
@@ -11,6 +13,16 @@ public enum ElementType {
     Source;
     //Ant;
 
+public static ElementType fromString(String text){
+    return valueOf(text);
+}
+
+public static String getClassName(Element element){
+    String className;
+    className = new String (element.getClass().getName());
+    className = className.substring(className.lastIndexOf(".") + 1);
+    return className;
+}
 
 
     /*public static ElementType fromString(String text) {

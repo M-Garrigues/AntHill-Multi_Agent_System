@@ -46,15 +46,20 @@ public class Settings {
 
             while ((currentLine = bufferReader.readLine()) != null) {
                 value =  Integer.parseInt(currentLine);
-                switch (counter){
-                    case 0 : this.mapSizeX = value;
-                    case 1 : this.mapSizeY = value;
-                    case 2 : this.nbSources = value;
-                    case 3 : this.nbAnts = value;
-                    case 4 : this.foodStackMin = value;
-                    case 5 : this.foodStackMax = value;
+                switch (counter) {
+                    case 0:
+                        this.mapSizeX = value;
+                    case 1:
+                        this.mapSizeY = value;
+                    case 2:
+                        this.nbSources = value;
+                    case 3:
+                        this.nbAnts = value;
+                    case 4:
+                        this.foodStackMin = value;
+                    case 5:
+                        this.foodStackMax = value;
                 }
-                System.out.println(currentLine);
                 counter += 1;
            }
         } catch (IOException e){
