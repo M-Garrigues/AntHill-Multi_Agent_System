@@ -9,6 +9,9 @@ public class Position{
     private int y;
 
 
+    public Position()
+    {    }
+
     public Position(int x, int y)
     {
         this.x = x;
