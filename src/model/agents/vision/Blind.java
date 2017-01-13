@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Coded by Mathieu GARRIGUES on 13/01/2017.
  */
-public class Blind { // This vision class just gives the agent the cell it is on.
+public class Blind implements Vision{ // This vision class just gives the agent the cell it is on.
 
     public ArrayList watch(Map map, Position pos) {
         ArrayList<Cell> viewedCells = new ArrayList<Cell>();

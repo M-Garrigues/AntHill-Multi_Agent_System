@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Coded by Mathieu GARRIGUES on 13/01/2017.
  */
-public class Godlike { // This vision class allows the agent to see the whole map, without limitations.
+public class Godlike implements Vision{ // This vision class allows the agent to see the whole map, without limitations.
 
     public ArrayList watch(Map map, Position pos) {
         ArrayList<Cell> viewedCells = new ArrayList<Cell>();

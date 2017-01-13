@@ -1,6 +1,7 @@
 package model.agents;
 
 import model.Position;
+import model.agents.vision.Godlike;
 import model.agents.vision.Vision;
 import model.elements.Element;
 import model.map.Cell;
@@ -15,10 +16,16 @@ public class Agent extends Element implements Runnable{
     protected Vision vision;
     ArrayList<Cell> perceivedCells;
 
-
+    public Agent() {
+        super(new Position(0,0));
+        vision = new Godlike();
+        perceivedCells = new ArrayList<>();
+    }
 
     public Agent(Position position) {
         super(position);
+        vision = new Godlike();
+        perceivedCells = new ArrayList<>();
     }
 
 
