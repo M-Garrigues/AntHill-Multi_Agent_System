@@ -42,7 +42,7 @@ public class Map {
             for (int j = 0; j < this.sizeY ; j++){
                 Position newPos = new Position (i,j);
                 Cell newCell = new Cell (newPos);
-                if ((i == 0) || (i == this.sizeX) || (j == 0) || (j == this.sizeY)){
+                if ((i == 0) || (i == this.sizeX-1) || (j == 0) || (j == this.sizeY-1)){
                     Obstacle newObstacle = new Obstacle (newPos);
                     newCell.addElement(newObstacle);
                 }
@@ -59,6 +59,7 @@ public class Map {
         cellAntHill = getCellPosition(posAntHill);
         AntHill antHill = new AntHill(posAntHill, settings.getNbAnts());
         cellAntHill.addElement(antHill);
+        System.out.println("Position de la AntHill : " + posXAntHill + " , " + posYAntHill);
 
         // Adding Sources to the map
         for (int i = 0; i < settings.getNbSources(); i++){
@@ -75,7 +76,7 @@ public class Map {
                 posYSource = 1 + (int) (Math.random() * (settings.getMapSizeY() - 2));
                 posSource = new Position(posXSource,posYSource);
                 cellSource = getCellPosition(posSource);
-            }while (cellSource == null);
+            }while (cellSource.cellEmpty()!= true);
             System.out.println("Position de la source : " + posXSource + " , " + posYSource);
             int foodStack = settings.getFoodStackMin() + (int)(Math.random() * (settings.getFoodStackMax()));
 

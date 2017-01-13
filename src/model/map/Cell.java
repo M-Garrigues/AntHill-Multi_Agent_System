@@ -49,9 +49,18 @@ public class Cell {
 
     public void printCell (){
         System.out.println("Position X : " + this.position.getX() + " Position Y : "+ this.position.getY());
-        System.out.println("Anthill : " + this.elements.get(ElementType.AntHill).isEmpty());
-        System.out.println("Obstacle : " + this.elements.get(ElementType.Obstacle).isEmpty());
-        System.out.println("Source : " + this.elements.get(ElementType.Source).isEmpty());
+        System.out.println("Anthill : " + !this.elements.get(ElementType.AntHill).isEmpty());
+        System.out.println("Obstacle : " + !this.elements.get(ElementType.Obstacle).isEmpty());
+        System.out.println("Source : " + !this.elements.get(ElementType.Source).isEmpty());
+    }
+
+    public boolean cellEmpty(){
+        if ((this.elements.get(ElementType.AntHill).isEmpty()) && (this.elements.get(ElementType.Obstacle).isEmpty()) && (this.elements.get(ElementType.Obstacle).isEmpty())){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

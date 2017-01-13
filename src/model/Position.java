@@ -27,9 +27,6 @@ public class Position{
             return false;
     }
 
-
-
-
     public int getY() {
         return y;
     }
