@@ -22,8 +22,9 @@ public class OneStep implements Movement{
             for(int j = moveY; j < moveY; j++){
                 posTemp.setX(i);
                 posTemp.setY(j);
-                if (!map.getCellPosition(posTemp).isObstacle()) {
-                    cellMove.add(map.getCellPosition(posTemp));
+                Cell tempCell = map.getCellPosition(posTemp);
+                if (!tempCell.isObstacle()) {
+                    cellMove.add(tempCell);
                 }
             }
         }
