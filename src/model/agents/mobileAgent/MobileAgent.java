@@ -1,6 +1,5 @@
 package model.agents.mobileAgent;
 
-import javafx.geometry.Pos;
 import model.Position;
 import model.agents.Agent;
 import model.agents.mobileAgent.movement.Movement;
