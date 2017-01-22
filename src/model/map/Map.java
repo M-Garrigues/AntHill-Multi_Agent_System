@@ -6,6 +6,9 @@ import model.elements.AntHill;
 import model.elements.Obstacle;
 import model.elements.Source;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +29,7 @@ public class Map {
         this.agents = new ArrayList<AgentList>();
         this.cells = new ArrayList<Cell>();
     }
-
+/*
     public void genMap (Settings settings){
         this.sizeX = settings.getMapSizeX();
         this.sizeY = settings.getMapSizeY();
@@ -37,7 +40,7 @@ public class Map {
                 Position newPos = new Position (i,j);
                 Cell newCell = new Cell (newPos);
                 if ((i == 0) || (i == this.sizeX-1) || (j == 0) || (j == this.sizeY-1)){
-                    Obstacle newObstacle = new Obstacle (newPos);
+               Obstacle newObstacle = new Obstacle (newPos);
                     newCell.addElement(newObstacle);
                 }
                 this.cells.add(newCell);
@@ -60,23 +63,62 @@ public class Map {
             addSourceMap(settings);
         }
     }
+*/
+    public void loadMap (Settings settings){
 
-    public void addSourceMap (Settings settings){
-            Position posSource;
-            Cell cellSource;
-            int posXSource,posYSource;
-            do {
-                posXSource = 1 + (int) (Math.random() * (settings.getMapSizeX() - 2));
-                posYSource = 1 + (int) (Math.random() * (settings.getMapSizeY() - 2));
-                posSource = new Position(posXSource,posYSource);
-                cellSource = getCellPosition(posSource);
-            }while (cellSource.cellEmpty()!= true);
-            System.out.println("Position de la source : " + posXSource + " , " + posYSource);
-            int foodStack = settings.getFoodStackMin() + (int)(Math.random() * (settings.getFoodStackMax()));
+        this.sizeX = settings.getMapSizeX();
+        this.sizeY = settings.getMapSizeY();
 
+        String filename = "data/map/map.txt";
+        FileReader fileReader;
+        BufferedReader bufferReader;
+        String currentLine;
+        char[] charLine;
+        char charCell;
+        int lineNumber = 0;
+        int intLine;
 
-            Source source = new Source(posSource,true,foodStack);
-            cellSource.addElement(source);
+        try {
+            fileReader = new FileReader(filename);
+            bufferReader = new BufferedReader(fileReader);
+            while (lineNumber < this.sizeY){
+                System.out.println("-----------------" + lineNumber + "--------------");
+                currentLine = bufferReader.readLine();
+                charLine = currentLine.toCharArray();
+
+                for (int k = 0; k < this.sizeX ; k++){
+                    System.out.println(k + " : " + charLine[k]);
+                    charCell = charLine[k];
+                    Position actualPosition = new Position(k,lineNumber);
+                    Cell actualCell = new Cell (actualPosition);
+                    switch (charCell){
+                        case '0' :
+                            //Empty cell
+                            this.cells.add(actualCell);
+                        case '1' :
+                            //Wall
+                            Obstacle newObstacle = new Obstacle (actualPosition);
+                            actualCell.addElement(newObstacle);
+                            this.cells.add(actualCell);
+                        case '2':
+                            //AntHill
+                            AntHill newAntHill = new AntHill(actualPosition, settings.getNbAnts());
+                            actualCell.addElement(newAntHill);
+                            this.cells.add(actualCell);
+                        case '3':
+                            //Source
+                            int foodStack = settings.getFoodStackMin() + (int)(Math.random() * (settings.getFoodStackMax()));
+                            Source newSource = new Source (actualPosition,true,foodStack);
+                            actualCell.addElement(newSource);
+                            this.cells.add(actualCell);
+                    }
+                }
+                lineNumber ++;
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 

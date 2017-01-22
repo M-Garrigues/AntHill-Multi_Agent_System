@@ -14,13 +14,19 @@ import model.map.Map;
 public class App {
     public static void main(String[] args)
     {
+        Map map = new Map(2,2);
+        Settings set = new Settings();
+        set.readFile();
+        map.loadMap(set);
+        map.printMap();
+
 
         //Main test map + settings
-        Settings set = new Settings();
+        /*Settings set = new Settings();
         Map newMap = new Map(2,2);
         set.readFile();
         newMap.genMap(set);
-        newMap.printMap();
+        newMap.printMap();*/
 
         //Main test addElement
         /*Position position = new Position(1,1);

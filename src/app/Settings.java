@@ -29,12 +29,11 @@ public class Settings {
         //Reading from file map
         //Line 1 : map size X
         //Line 2 : map size Y
-        //Line 3 : number of supply on the map
-        //Line 4 : number of ants
-        //Line 5 : minimum food supply on a source
-        //Line 6 : maximum food supply on a source
+        //Line 3 : number of ants
+        //Line 4 : minimum food supply on a source
+        //Line 5 : maximum food supply on a source
 
-        String filename = "data/map/map.txt";
+        String filename = "data/map/settings";
         FileReader fileReader;
         BufferedReader bufferReader;
         String currentLine;
@@ -52,12 +51,10 @@ public class Settings {
                     case 1:
                         this.mapSizeY = value;
                     case 2:
-                        this.nbSources = value;
-                    case 3:
                         this.nbAnts = value;
-                    case 4:
+                    case 3:
                         this.foodStackMin = value;
-                    case 5:
+                    case 4:
                         this.foodStackMax = value;
                 }
                 counter += 1;
