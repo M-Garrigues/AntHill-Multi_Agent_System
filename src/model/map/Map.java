@@ -3,16 +3,10 @@ package model.map;
 import app.Settings;
 import model.Position;
 import model.elements.AntHill;
-import model.elements.Element;
 import model.elements.Obstacle;
 import model.elements.Source;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by Mathieu on 10/01/2017.
