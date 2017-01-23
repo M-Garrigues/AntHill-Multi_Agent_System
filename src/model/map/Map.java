@@ -81,40 +81,52 @@ public class Map {
         try {
             fileReader = new FileReader(filename);
             bufferReader = new BufferedReader(fileReader);
+
+
             while (lineNumber < this.sizeY){
                 System.out.println("-----------------" + lineNumber + "--------------");
                 currentLine = bufferReader.readLine();
                 charLine = currentLine.toCharArray();
 
                 for (int k = 0; k < this.sizeX ; k++){
+
                     System.out.println(k + " : " + charLine[k]);
+
                     charCell = charLine[k];
                     Position actualPosition = new Position(k,lineNumber);
                     Cell actualCell = new Cell (actualPosition);
+
+                    //this.cells.add(actualCell);
                     switch (charCell){
                         case '0' :
                             //Empty cell
                             this.cells.add(actualCell);
+                            break;
                         case '1' :
                             //Wall
                             Obstacle newObstacle = new Obstacle (actualPosition);
                             actualCell.addElement(newObstacle);
                             this.cells.add(actualCell);
+                            break;
                         case '2':
                             //AntHill
                             AntHill newAntHill = new AntHill(actualPosition, settings.getNbAnts());
                             actualCell.addElement(newAntHill);
                             this.cells.add(actualCell);
+                            break;
                         case '3':
                             //Source
                             int foodStack = settings.getFoodStackMin() + (int)(Math.random() * (settings.getFoodStackMax()));
                             Source newSource = new Source (actualPosition,true,foodStack);
                             actualCell.addElement(newSource);
                             this.cells.add(actualCell);
+                            break;
                     }
                 }
                 lineNumber ++;
             }
+
+            this.printMap();
         }
         catch (IOException e){
             e.printStackTrace();
@@ -123,9 +135,14 @@ public class Map {
 
 
     public void printMap (){
-        int sizeTab = this.sizeX*this.sizeY;
-        for (int i=0; i < sizeTab; i++){
-            this.cells.get(i).printCell();
+        for (int i=0; i < this.getSizeY(); i++){
+
+            System.out.println("\n\n ===== " + i + " =====\n");
+
+            for (int j=0; j < this.getSizeX(); j++){
+
+                this.getCellPosition(new Position(j,i)).printCell();
+            }
         }
     }
     

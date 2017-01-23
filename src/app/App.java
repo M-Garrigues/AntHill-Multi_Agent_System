@@ -1,11 +1,5 @@
 package app;
 
-import model.Position;
-import model.elements.AntHill;
-import model.elements.Obstacle;
-import model.elements.Pheromone;
-import model.elements.Source;
-import model.map.Cell;
 import model.map.Map;
 
 /**
@@ -18,7 +12,7 @@ public class App {
         Settings set = new Settings();
         set.readFile();
         map.loadMap(set);
-        map.printMap();
+        //map.printMap();
 
 
         //Main test map + settings
