@@ -37,6 +37,7 @@ public class Map {
 
         String currentLine;
         int counter = 0; //Compte les lignes lues
+        int line = 0;
         int numberSources = 0;
         ArrayList<Integer> listFoodStack = new ArrayList<Integer>();
 
@@ -48,23 +49,33 @@ public class Map {
             while ((currentLine = bufferedReader.readLine()) != null){
 
                 switch (counter){
+
                     case 0 :
                         //Size X
                         int sizeX = Integer.parseInt(currentLine);
                         this.sizeX = sizeX;
                         break;
+
                     case 1 :
                         //Size Y
                         int sizeY = Integer.parseInt(currentLine);
                         this.sizeY = sizeY;
                         break;
+
                     case 2 :
                         //Number of sources
                         numberSources = Integer.parseInt(currentLine);
                         break;
+
                     case 3 :
                         //Food Stack for all sources
                         listFoodStack = foodStack(currentLine);
+                        break;
+
+                    default :
+                        InitializeElements(currentLine,line);
+                        line++;
+                        break;
                 }
                 counter ++;
             }
@@ -79,6 +90,41 @@ public class Map {
             e.printStackTrace();
         }
 
+    }
+
+    public void InitializeElements (String currentLine, int line){
+
+        char[] charLine;
+        char charCell;
+
+        charLine = currentLine.toCharArray();
+
+        for (int i=0;i<charLine.length;i++){
+
+            charCell = charLine[i];
+            Position actualPosition = new Position(i,line);
+            Cell actualCell = new Cell(actualPosition);
+
+            switch(charCell){
+
+                case '#' :
+                    Obstacle obstacle = new Obstacle(actualPosition);
+                    actualCell.addElement(obstacle);
+                    break;
+
+                case 'x' :
+                    AntHill antHill = new AntHill(actualPosition,40);
+                    actualCell.addElement(antHill);
+                    break;
+
+                case 'o' :
+                    Source source = new Source(actualPosition,true,10);
+                    actualCell.addElement(source);
+                    break;
+            }
+
+            this.cells.add(actualCell);
+        }
     }
 
     public ArrayList<Integer> foodStack(String currentLine){

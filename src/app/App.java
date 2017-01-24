@@ -10,7 +10,7 @@ public class App {
     {
         Map map = new Map(2,2);
         map.loadMap();
-        //map.printMap();
+        map.printMap();
 
 
         //Main test map + settings
