@@ -9,9 +9,7 @@ public class App {
     public static void main(String[] args)
     {
         Map map = new Map(2,2);
-        Settings set = new Settings();
-        set.readFile();
-        map.loadMap(set);
+        map.loadMap();
         //map.printMap();
 
 

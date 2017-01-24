@@ -29,110 +29,69 @@ public class Map {
         this.agents = new ArrayList<AgentList>();
         this.cells = new ArrayList<Cell>();
     }
-/*
-    public void genMap (Settings settings){
-        this.sizeX = settings.getMapSizeX();
-        this.sizeY = settings.getMapSizeY();
+    public void loadMap (){
 
-        //Initializing every cell from the map
-        for (int i = 0; i < this.sizeX ; i++){
-            for (int j = 0; j < this.sizeY ; j++){
-                Position newPos = new Position (i,j);
-                Cell newCell = new Cell (newPos);
-                if ((i == 0) || (i == this.sizeX-1) || (j == 0) || (j == this.sizeY-1)){
-               Obstacle newObstacle = new Obstacle (newPos);
-                    newCell.addElement(newObstacle);
-                }
-                this.cells.add(newCell);
-            }
-        }
-
-        // Adding Anthill to the map
-        Position posAntHill;
-        int posXAntHill = 1 + (int)(Math.random() * (this.sizeX-2));
-        int posYAntHill = 1 + (int)(Math.random() * (this.sizeY-2));
-        posAntHill = new Position(posXAntHill,posYAntHill);
-        Cell cellAntHill;
-        cellAntHill = getCellPosition(posAntHill);
-        AntHill antHill = new AntHill(posAntHill, settings.getNbAnts());
-        cellAntHill.addElement(antHill);
-        System.out.println("Position de la AntHill : " + posXAntHill + " , " + posYAntHill);
-
-        // Adding Sources to the map
-        for (int i = 0; i < settings.getNbSources(); i++){
-            addSourceMap(settings);
-        }
-    }
-*/
-    public void loadMap (Settings settings){
-
-        this.sizeX = settings.getMapSizeX();
-        this.sizeY = settings.getMapSizeY();
-
-        String filename = "data/map/map.txt";
+        String filename = "data/map/maptext.txt";
         FileReader fileReader;
-        BufferedReader bufferReader;
+        BufferedReader bufferedReader;
+
         String currentLine;
-        char[] charLine;
-        char charCell;
-        int lineNumber = 0;
-        int intLine;
+        int counter = 0; //Compte les lignes lues
+        int numberSources = 0;
+        ArrayList<Integer> listFoodStack = new ArrayList<Integer>();
+
 
         try {
             fileReader = new FileReader(filename);
-            bufferReader = new BufferedReader(fileReader);
+            bufferedReader = new BufferedReader(fileReader);
 
+            while ((currentLine = bufferedReader.readLine()) != null){
 
-            while (lineNumber < this.sizeY){
-                System.out.println("-----------------" + lineNumber + "--------------");
-                currentLine = bufferReader.readLine();
-                charLine = currentLine.toCharArray();
-
-                for (int k = 0; k < this.sizeX ; k++){
-
-                    System.out.println(k + " : " + charLine[k]);
-
-                    charCell = charLine[k];
-                    Position actualPosition = new Position(k,lineNumber);
-                    Cell actualCell = new Cell (actualPosition);
-
-                    //this.cells.add(actualCell);
-                    switch (charCell){
-                        case '0' :
-                            //Empty cell
-                            this.cells.add(actualCell);
-                            break;
-                        case '1' :
-                            //Wall
-                            Obstacle newObstacle = new Obstacle (actualPosition);
-                            actualCell.addElement(newObstacle);
-                            this.cells.add(actualCell);
-                            break;
-                        case '2':
-                            //AntHill
-                            AntHill newAntHill = new AntHill(actualPosition, settings.getNbAnts());
-                            actualCell.addElement(newAntHill);
-                            this.cells.add(actualCell);
-                            break;
-                        case '3':
-                            //Source
-                            int foodStack = settings.getFoodStackMin() + (int)(Math.random() * (settings.getFoodStackMax()));
-                            Source newSource = new Source (actualPosition,true,foodStack);
-                            actualCell.addElement(newSource);
-                            this.cells.add(actualCell);
-                            break;
-                    }
+                switch (counter){
+                    case 0 :
+                        //Size X
+                        int sizeX = Integer.parseInt(currentLine);
+                        this.sizeX = sizeX;
+                        break;
+                    case 1 :
+                        //Size Y
+                        int sizeY = Integer.parseInt(currentLine);
+                        this.sizeY = sizeY;
+                        break;
+                    case 2 :
+                        //Number of sources
+                        numberSources = Integer.parseInt(currentLine);
+                        break;
+                    case 3 :
+                        //Food Stack for all sources
+                        listFoodStack = foodStack(currentLine);
                 }
-                lineNumber ++;
+                counter ++;
             }
-
-            this.printMap();
+            System.out.println("Taille X : "+ this.sizeX);
+            System.out.println("Taille Y : "+ this.sizeY);
+            System.out.println("Nombre de sources "+ numberSources);
+            for (int i = 0; i< listFoodStack.size(); i++){
+                System.out.println("Source : "+ i +" : "+ listFoodStack.get(i));
+            }
         }
         catch (IOException e){
             e.printStackTrace();
         }
+
     }
 
+    public ArrayList<Integer> foodStack(String currentLine){
+
+        String[] tabFoodStack;
+        ArrayList<Integer>  listFoodStack = new ArrayList<Integer>();
+        tabFoodStack = currentLine.split(" ");
+        for (int i = 0; i < tabFoodStack.length ; i++){
+            listFoodStack.add(i,Integer.parseInt(tabFoodStack[i]));
+        }
+
+        return listFoodStack;
+    }
 
     public void printMap (){
         for (int i=0; i < this.getSizeY(); i++){

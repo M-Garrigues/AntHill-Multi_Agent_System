@@ -33,7 +33,7 @@ public class Settings {
         //Line 4 : minimum food supply on a source
         //Line 5 : maximum food supply on a source
 
-        String filename = "data/map/settings";
+        String filename = "data/map/map.txt";
         FileReader fileReader;
         BufferedReader bufferReader;
         String currentLine;
