@@ -81,7 +81,7 @@ public class Map {
             }
             System.out.println("Taille X : "+ this.sizeX);
             System.out.println("Taille Y : "+ this.sizeY);
-            System.out.println("Nombre de sources "+ numberSources);
+            System.out.println("Nombre de sources :"+ numberSources);
             for (int i = 0; i< listFoodStack.size(); i++){
                 System.out.println("Source : "+ i +" : "+ listFoodStack.get(i));
             }

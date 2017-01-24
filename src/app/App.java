@@ -1,6 +1,7 @@
 package app;
 
 import model.map.Map;
+import view.MapView;
 
 /**
  * Created by Mathieu on 10/01/2017.
@@ -10,8 +11,9 @@ public class App {
     {
         Map map = new Map(2,2);
         map.loadMap();
-        map.printMap();
-
+        MapView mapView = new MapView(map);
+        mapView.printMap();
+        //map.printMap();
 
         //Main test map + settings
         /*Settings set = new Settings();
