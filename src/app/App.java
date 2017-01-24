@@ -5,11 +5,13 @@ import model.map.Map;
 /**
  * Created by Mathieu on 10/01/2017.
  */
+
 public class App {
     public static void main(String[] args)
     {
         Map map = new Map(2,2);
         map.loadMap();
+        System.out.println(Runtime.getRuntime().availableProcessors());
         //map.printMap();
 
 
