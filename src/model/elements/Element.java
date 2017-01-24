@@ -22,11 +22,11 @@ public class Element {
 
 
 
-    public Position getPosition() {
+    public synchronized Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
+    public synchronized void setPosition(Position position) {
         this.position = position;
     }
 }

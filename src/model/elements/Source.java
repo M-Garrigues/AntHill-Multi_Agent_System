@@ -7,8 +7,9 @@ import model.Position;
  */
 public class Source extends Element {
 
-    boolean usable;
-    int foodStack;
+    private boolean usable;
+    private int foodStack;
+
 
     public Source(Position position, boolean usable, int foodStack) {
         super(position);
@@ -19,7 +20,7 @@ public class Source extends Element {
 
 
 
-    public void takeFood(){
+    public synchronized void takeFood(){
         this.foodStack--;
         if(this.foodStack == 0) this.usable = false;
     }
@@ -29,19 +30,19 @@ public class Source extends Element {
 
 
 
-    public boolean isUsable() {
+    public synchronized boolean isUsable() {
         return usable;
     }
 
-    public void setUsable(boolean usable) {
+    public synchronized void setUsable(boolean usable) {
         this.usable = usable;
     }
 
-    public int getFoodStack() {
+    public synchronized int getFoodStack() {
         return foodStack;
     }
 
-    public void setFoodStack(int foodStack) {
+    public synchronized void setFoodStack(int foodStack) {
         this.foodStack = foodStack;
     }
 

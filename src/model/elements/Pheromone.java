@@ -15,20 +15,20 @@ public class Pheromone extends Element{
     }
 
 
-    public void tick(){
+    public synchronized void tick(){
         this.quantity--;
     }
 
-    public void add(int quantity){
+    public synchronized void add(int quantity){
         this.quantity += quantity;
     }
 
 
-    public int getQuantity() {
+    public synchronized int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public synchronized void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

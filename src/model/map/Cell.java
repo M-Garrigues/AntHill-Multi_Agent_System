@@ -5,6 +5,8 @@ import model.elements.Element;
 import model.elements.ElementType;
 
 import java.util.EnumMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import static view.ErrorView.textError;
 
@@ -17,6 +19,11 @@ public class Cell {
 
     private EnumMap<ElementType, ElementList> elements;
     private Position position;
+
+    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+
+    private Lock readLock = lock.readLock();
+    private Lock writeLock = lock.writeLock();
 
 
     public Cell() {
@@ -39,57 +46,149 @@ public class Cell {
 
     public void addElement(Element element){
 
-        /* This function gets the element's class name, and uses it to find is associated enum (valueOf(className) ).
-        Once done, it adds the element to its specified ElementList.*/
-        String className;
-        className = ElementType.getClassName(element);
-        ElementType keyElement = ElementType.fromString(className);
-        this.elements.get(keyElement).add(element);
+        writeLock.lock();
+
+        try{
+
+            /* This function gets the element's class name, and uses it to find is associated enum (valueOf(className) ).
+            Once done, it adds the element to its specified ElementList.*/
+            String className;
+            className = ElementType.getClassName(element);
+            ElementType keyElement = ElementType.fromString(className);
+            this.elements.get(keyElement).add(element);
+        }
+        finally {
+            writeLock.unlock();
+        }
+
     }
 
     public void printCell (){
-        System.out.println("Position X : " + this.position.getX() + " Position Y : "+ this.position.getY());
-        System.out.println("Anthill : " + !this.elements.get(ElementType.AntHill).isEmpty());
-        System.out.println("Obstacle : " + !this.elements.get(ElementType.Obstacle).isEmpty());
-        System.out.println("Source : " + !this.elements.get(ElementType.Source).isEmpty());
+
+        readLock.lock();
+
+        try{
+            System.out.println("Position X : " + this.position.getX() + " Position Y : "+ this.position.getY());
+            System.out.println("Anthill : " + !this.elements.get(ElementType.AntHill).isEmpty());
+            System.out.println("Obstacle : " + !this.elements.get(ElementType.Obstacle).isEmpty());
+            System.out.println("Source : " + !this.elements.get(ElementType.Source).isEmpty());
+        }
+        finally {
+            readLock.unlock();
+        }
     }
 
     public boolean cellEmpty(){
-        if ((this.elements.get(ElementType.AntHill).isEmpty()) && (this.elements.get(ElementType.Obstacle).isEmpty()) && (this.elements.get(ElementType.Obstacle).isEmpty())){
-            return true;
+
+        readLock.lock();
+
+        try{
+            if ((this.elements.get(ElementType.AntHill).isEmpty()) && (this.elements.get(ElementType.Obstacle).isEmpty()) && (this.elements.get(ElementType.Obstacle).isEmpty())){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        else{
-            return false;
+        finally {
+            readLock.unlock();
         }
+
     }
 
 
 
 
     public boolean isObstacle(){
-        return(!elements.get(ElementType.Obstacle).isEmpty());
+
+        readLock.lock();
+        boolean b = true;
+
+        try{
+            b = !elements.get(ElementType.Obstacle).isEmpty();
+        }
+        catch (Exception e){
+            b = true;
+            textError("Error on obstacle test.");
+        }
+        finally {
+            readLock.unlock();
+            return b;
+
+        }
     }
 
     public boolean isSource(){
-        return(!elements.get(ElementType.Source).isEmpty());
+        readLock.lock();
+        boolean b = true;
+
+        try{
+            b = !elements.get(ElementType.Source).isEmpty();
+        }
+        catch (Exception e){
+            b = true;
+            textError("Error on source test.");
+        }
+        finally {
+            readLock.unlock();
+            return b;
+        }
+
     }
 
     public boolean isAntHill(){
-        return(!elements.get(ElementType.AntHill).isEmpty());
+
+        readLock.lock();
+        boolean b = true;
+
+        try{
+            b = !elements.get(ElementType.AntHill).isEmpty();
+        }
+        catch (Exception e){
+            b = true;
+            textError("Error on antHill test.");
+        }
+        finally {
+            readLock.unlock();
+            return b;
+
+        }
+
     }
 
     public boolean hasPheromone(){
-        return(!elements.get(ElementType.Pheromone).isEmpty());
+
+        readLock.lock();
+        boolean b = true;
+
+        try{
+            b = !elements.get(ElementType.Pheromone).isEmpty();
+        }
+        catch (Exception e){
+            b = true;
+            textError("Error on pheromone test.");
+        }
+        finally {
+            readLock.unlock();
+            return b;
+
+        }
     }
 
 
 
     public Element getPheromone(){
+
+        readLock.lock();
+
         try{
             return elements.get(ElementType.Pheromone).get(0);
         }
         catch(Exception e){
             textError("get pheromone on empty cell.");
+        }
+        finally {
+            readLock.unlock();
         }
         return null;
     }
