@@ -73,17 +73,11 @@ public class Map {
                         break;
 
                     default :
-                        InitializeElements(currentLine,line);
+                        numberSources = InitializeElements(currentLine,line,listFoodStack,numberSources);
                         line++;
                         break;
                 }
                 counter ++;
-            }
-            System.out.println("Taille X : "+ this.sizeX);
-            System.out.println("Taille Y : "+ this.sizeY);
-            System.out.println("Nombre de sources :"+ numberSources);
-            for (int i = 0; i< listFoodStack.size(); i++){
-                System.out.println("Source : "+ i +" : "+ listFoodStack.get(i));
             }
         }
         catch (IOException e){
@@ -92,7 +86,7 @@ public class Map {
 
     }
 
-    public void InitializeElements (String currentLine, int line){
+    public int InitializeElements (String currentLine, int line,ArrayList<Integer> listFoodStack,int numberSources){
 
         char[] charLine;
         char charCell;
@@ -118,13 +112,17 @@ public class Map {
                     break;
 
                 case 'o' :
-                    Source source = new Source(actualPosition,true,10);
+                    int foodStack = listFoodStack.get(numberSources - 1);
+                    Source source = new Source(actualPosition,true,foodStack);
                     actualCell.addElement(source);
+                    numberSources--;
                     break;
             }
 
             this.cells.add(actualCell);
         }
+
+        return numberSources;
     }
 
     public ArrayList<Integer> foodStack(String currentLine){
@@ -139,18 +137,90 @@ public class Map {
         return listFoodStack;
     }
 
-    public void printMap (){
-        for (int i=0; i < this.getSizeY(); i++){
+    public boolean checkMap (){
+        int countSource = 0;
+        int countAnthill = 0;
+        boolean checkWall = true;
 
-            System.out.println("\n\n ===== " + i + " =====\n");
+        for (int i = 0; i < this.sizeX; i++ ){
+            for (int j = 0; j < this.sizeY; j++){
 
-            for (int j=0; j < this.getSizeX(); j++){
+                Position actualPosition = new Position (i,j);
+                Cell actualCell = getCellPosition(actualPosition);
 
-                this.getCellPosition(new Position(j,i)).printCell();
+                if ((i == 0)||(i == this.sizeX-1)||(j == 0)||(j == this.sizeY-1)){
+
+                    if (!actualCell.isObstacle()){
+
+                        checkWall = false;
+                    }
+                }
+                else if (actualCell.isSource()){
+                    countSource++;
+                }
+                else if (actualCell.isAntHill()){
+                    countAnthill++;
+                }
+
             }
         }
+        if ((countAnthill == 1) && (countSource >= 1) && checkWall){
+            return true;
+        }
+
+        return false;
     }
-    
+    public boolean getSources (){
+
+        for (int i = 0; i< sizeX; i++){
+            for (int j = 0; j< sizeY; j++){
+
+                Position actualPosition = new Position(i,j);
+                Cell actualCell = this.getCellPosition(actualPosition);
+                if (actualCell.isSource()){
+                    return checkPass(actualCell);
+                }
+            }
+        }
+
+        return false;
+    }
+    public boolean checkPass (Cell cellSource){
+
+        ArrayList<Cell> cellCheck = new ArrayList<Cell>();
+        int posX = cellSource.getPosition().getX();
+        int posY = cellSource.getPosition().getY();
+
+        for (int i = posX - 1; i <= posX + 1; i++){
+            for (int j = posY - 1; j <= posY + 1; j++){
+
+                Position actualPosition = new Position(i,j);
+                Cell actualCell = this.getCellPosition(actualPosition);
+
+                if (actualCell.isAntHill()){
+
+                    return true;
+                }
+
+                else if (!actualCell.isObstacle()){
+
+                    cellCheck.add(actualCell);
+
+                }
+            }
+        }
+
+        for (int k = 0; k < cellCheck.size(); k++){
+
+            if(checkPass(cellCheck.get(k))){
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public Cell getCellPosition (Position position){
         int posX = position.getX();
         int posY = position.getY();

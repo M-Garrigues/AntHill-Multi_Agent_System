@@ -9,10 +9,13 @@ import view.MapView;
 public class App {
     public static void main(String[] args)
     {
+        boolean test;
         Map map = new Map(2,2);
         map.loadMap();
         MapView mapView = new MapView(map);
         mapView.printMap();
+        test = map.getSources();
+        System.out.println(test);
         //map.printMap();
 
         //Main test map + settings
