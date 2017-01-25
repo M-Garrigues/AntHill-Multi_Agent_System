@@ -44,6 +44,13 @@ public class Cell {
         }
     }
 
+
+
+
+
+    //===================================== WRITE LOCK USED ========================================
+
+
     public void addElement(Element element){
 
         writeLock.lock();
@@ -60,8 +67,31 @@ public class Cell {
         finally {
             writeLock.unlock();
         }
+    }
+
+
+    public void deleteElement (Element element){
+
+        writeLock.lock();
+
+        try{
+            String className = ElementType.getClassName(element);
+
+            ElementType keyElement = ElementType.fromString(className);
+
+            this.elements.get(keyElement).remove(element);
+        }
+        finally {
+            writeLock.unlock();
+        }
+
+
 
     }
+
+
+
+
 
     public void printCell (){
 
@@ -77,6 +107,13 @@ public class Cell {
             readLock.unlock();
         }
     }
+
+
+
+    //===================================== READ LOCK USED ========================================
+
+
+
 
     public boolean cellEmpty(){
 

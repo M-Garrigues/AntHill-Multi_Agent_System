@@ -8,6 +8,8 @@ import model.agents.vision.Godlike;
 import model.map.Map;
 import view.MapView;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by Mathieu on 10/01/2017.
  */
@@ -20,12 +22,25 @@ public class App {
         map.loadMap();
         System.out.println(Runtime.getRuntime().availableProcessors());
 
-        Runnable ant1 = new Agent(new Position(0,0));
+        Runnable ant1 = new Ant(new Position(0,0), new OneStep(), new Godlike());
                 //new Ant(new Position(0,0), new OneStep(), new Godlike());
 
         Agent ant2 = new Ant(new Position(1,1), new OneStep(), new Godlike());
 
+
         Thread t1 = new Thread(ant1);
+        Thread t2 = new Thread(ant2);
+
+        t1.start();
+        t2.start();
+
+        try{
+            sleep(10);
+        }
+        catch (Exception e){
+
+        }
+        System.out.println(Thread.currentThread().getName());
 
         //map.printMap();
 

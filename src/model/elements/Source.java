@@ -20,7 +20,7 @@ public class Source extends Element {
 
 
 
-    public synchronized void takeFood(){
+    public synchronized void foodTaken(){
         this.foodStack--;
         if(this.foodStack == 0) this.usable = false;
     }
