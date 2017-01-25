@@ -8,6 +8,10 @@ import model.agents.vision.Godlike;
 import model.map.Map;
 import view.MapView;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import static java.lang.Thread.sleep;
 
 /**
@@ -34,6 +38,7 @@ public class App {
         t1.start();
         t2.start();
 
+
         try{
             sleep(10);
         }
@@ -41,6 +46,28 @@ public class App {
 
         }
         System.out.println(Thread.currentThread().getName());
+
+
+         ExecutorService executor  = Executors.newCachedThreadPool();
+
+         executor.submit(ant1);
+         executor.submit(ant2);
+         executor.submit(ant1);
+         executor.submit(ant2);
+
+        executor.shutdown();
+
+        try{
+            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        }
+        catch (Exception e){
+
+        }
+        finally {
+            System.out.println("tout fini lol");
+        }
+
+
 
         //map.printMap();
 

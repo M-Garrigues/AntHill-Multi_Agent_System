@@ -84,29 +84,36 @@ public class Cell {
         finally {
             writeLock.unlock();
         }
-
-
-
     }
 
 
+    public void setElements(EnumMap<ElementType, ElementList> elements) {
 
-
-
-    public void printCell (){
-
-        readLock.lock();
+        writeLock.lock();
 
         try{
-            System.out.println("Position X : " + this.position.getX() + " Position Y : "+ this.position.getY());
-            System.out.println("Anthill : " + !this.elements.get(ElementType.AntHill).isEmpty());
-            System.out.println("Obstacle : " + !this.elements.get(ElementType.Obstacle).isEmpty());
-            System.out.println("Source : " + !this.elements.get(ElementType.Source).isEmpty());
+            this.elements = elements;
         }
         finally {
-            readLock.unlock();
+            writeLock.unlock();
         }
     }
+
+
+
+    public void setPosition(Position position) {
+
+        writeLock.lock();
+
+        try{
+            this.position = position;
+        }
+        finally {
+            writeLock.unlock();
+        }
+    }
+
+
 
 
 
@@ -132,8 +139,6 @@ public class Cell {
         }
 
     }
-
-
 
 
     public boolean isObstacle(){
@@ -212,8 +217,6 @@ public class Cell {
         }
     }
 
-
-
     public Element getPheromone(){
 
         readLock.lock();
@@ -232,25 +235,58 @@ public class Cell {
 
 
 
-
-
-
     public EnumMap<ElementType, ElementList> getElements() {
-        return elements;
+
+        readLock.lock();
+
+        try{
+            return elements;
+        }
+        catch(Exception e){
+            textError("get elements failed.");
+        }
+        finally {
+            readLock.unlock();
+        }
+        return null;
     }
 
-    public void setElements(EnumMap<ElementType, ElementList> elements) {
-        this.elements = elements;
-    }
 
     public Position getPosition() {
-        return position;
+
+        readLock.lock();
+
+        try{
+            return position;
+        }
+        catch(Exception e){
+            textError("get pheromone on empty cell.");
+        }
+        finally {
+            readLock.unlock();
+        }
+        return null;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+
+
+
+
+
+
+
+    public void printCell (){
+
+        readLock.lock();
+
+        try{
+            System.out.println("Position X : " + this.position.getX() + " Position Y : "+ this.position.getY());
+            System.out.println("Anthill : " + !this.elements.get(ElementType.AntHill).isEmpty());
+            System.out.println("Obstacle : " + !this.elements.get(ElementType.Obstacle).isEmpty());
+            System.out.println("Source : " + !this.elements.get(ElementType.Source).isEmpty());
+        }
+        finally {
+            readLock.unlock();
+        }
     }
-
-
-
 }
