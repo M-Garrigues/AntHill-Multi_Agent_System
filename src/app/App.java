@@ -1,22 +1,34 @@
 package app;
 
+import model.Position;
+import model.agents.Agent;
+import model.agents.mobileAgent.ant.Ant;
+import model.agents.mobileAgent.movement.OneStep;
+import model.agents.vision.Godlike;
 import model.map.Map;
 import view.MapView;
 
 /**
  * Created by Mathieu on 10/01/2017.
  */
+
 public class App {
     public static void main(String[] args)
     {
         boolean test;
         Map map = new Map(2,2);
         map.loadMap();
-        MapView mapView = new MapView(map);
-        mapView.printMap();
-        test = map.getSources();
-        System.out.println(test);
+        System.out.println(Runtime.getRuntime().availableProcessors());
+
+        Runnable ant1 = new Agent(new Position(0,0));
+                //new Ant(new Position(0,0), new OneStep(), new Godlike());
+
+        Agent ant2 = new Ant(new Position(1,1), new OneStep(), new Godlike());
+
+        Thread t1 = new Thread(ant1);
+
         //map.printMap();
+
 
         //Main test map + settings
         /*Settings set = new Settings();

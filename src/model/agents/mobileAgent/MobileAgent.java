@@ -4,6 +4,7 @@ import model.Position;
 import model.agents.Agent;
 import model.agents.mobileAgent.movement.Movement;
 import model.agents.mobileAgent.movement.OneStep;
+import model.agents.vision.Vision;
 import model.map.Cell;
 
 import java.util.ArrayList;
@@ -22,9 +23,10 @@ public class MobileAgent extends Agent{
         this.movement = movement;
     }
 
-    public MobileAgent(Position position, Movement movement) {
+    public MobileAgent(Position position, Movement movement, Vision vision) {
         super(position);
         this.movement = movement;
+        this.vision = vision;
     }
 
     public Movement getMovement() {

@@ -49,27 +49,27 @@ public class AntHill extends Element {
 
 
 
-    public int getTotalAnts() {
+    public synchronized int getTotalAnts() {
         return totalAnts;
     }
 
-    public void setTotalAnts(int totalAnts) {
+    public synchronized void setTotalAnts(int totalAnts) {
         this.totalAnts = totalAnts;
     }
 
-    public int getActualAnts() {
+    public synchronized int getActualAnts() {
         return actualAnts;
     }
 
-    public void setActualAnts(int actualAnts) {
+    public synchronized void setActualAnts(int actualAnts) {
         this.actualAnts = actualAnts;
     }
 
-    public int getFoodStack() {
+    public synchronized int getFoodStack() {
         return foodStack;
     }
 
-    public void setFoodStack(int foodStack) {
+    public synchronized void setFoodStack(int foodStack) {
         this.foodStack = foodStack;
     }
 }
