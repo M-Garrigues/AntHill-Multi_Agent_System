@@ -6,7 +6,6 @@ import model.agents.mobileAgent.ant.Ant;
 import model.agents.mobileAgent.movement.OneStep;
 import model.agents.vision.Godlike;
 import model.map.Map;
-import view.MapView;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
