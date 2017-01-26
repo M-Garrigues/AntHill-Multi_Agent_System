@@ -29,6 +29,24 @@ public class MobileAgent extends Agent{
         this.vision = vision;
     }
 
+
+    public void move(Cell startCell, Cell endCell){
+
+        startCell.lock();
+        endCell.lock();
+
+        endCell.addElement(this);
+        startCell.deleteElement(this);
+
+        startCell.unlock();
+        endCell.unlock();
+
+        this.setPosition(endCell.getPosition());
+
+    }
+
+
+
     public Movement getMovement() {
         return movement;
     }

@@ -29,6 +29,10 @@ public class App {
 
         ArrayList<Agent> ants = createAnts(10);
 
+        for (Agent ant: ants) {
+            map.getCellPosition(ant.getPosition()).addElement(ant); //adds the ant to the cell it belongs.
+        }
+
         for(int i = 0; i < 10; i++){
 
             System.out.println("\n\n ===== Boucle "+ i +" ===== \n\n");

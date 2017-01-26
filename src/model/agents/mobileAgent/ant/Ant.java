@@ -28,7 +28,9 @@ public class Ant extends MobileAgent{
 
     @Override
     public void run() {
-        System.out.println("======= "+ Thread.currentThread().getName() +"  ====  Mon id est "+ this.getClass().getName() + " et ma position " + this.getPosition().getX() + this.getPosition().getY());
+        System.out.println("======= "+ Thread.currentThread().getName() +"  ====  Mon id est "+ this.getClass() + " et ma position " + this.getPosition().getX() +";"+ this.getPosition().getY());
+        //this.move(map.getCellPosition);
+
     }
 
     public boolean hasFood() {
@@ -39,7 +41,7 @@ public class Ant extends MobileAgent{
         this.hasFood = true;
     }
 
-    public void giveFood(boolean hasFood) {
+    public void dropFood(boolean hasFood) {
         this.hasFood = false;
     }
 

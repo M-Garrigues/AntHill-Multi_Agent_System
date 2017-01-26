@@ -50,6 +50,17 @@ public class Cell {
 
     //===================================== WRITE LOCK USED ========================================
 
+    public void lock(){
+        this.writeLock.lock();
+    }
+
+    public void unlock(){
+        this.writeLock.unlock();
+    }
+
+
+
+
 
     public void addElement(Element element){
 
