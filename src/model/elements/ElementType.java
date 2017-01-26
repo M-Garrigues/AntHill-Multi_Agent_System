@@ -1,7 +1,5 @@
 package model.elements;
 
-import static view.ErrorView.textError;
-
 /**
  * Coded by Mathieu GARRIGUES on 12/01/2017.
  */
@@ -10,8 +8,8 @@ public enum ElementType {
     AntHill,
     Obstacle,
     Pheromone,
-    Source;
-    //Ant;
+    Source,
+    Ant;
 
 public static ElementType fromString(String text){
     return valueOf(text);

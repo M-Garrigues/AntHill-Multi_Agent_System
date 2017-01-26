@@ -7,11 +7,10 @@ import model.agents.mobileAgent.movement.OneStep;
 import model.agents.vision.Godlike;
 import model.map.Map;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import static java.lang.Thread.sleep;
 
 /**
  * Created by Mathieu on 10/01/2017.
@@ -25,46 +24,34 @@ public class App {
         map.loadMap();
         System.out.println(Runtime.getRuntime().availableProcessors());
 
-        Runnable ant1 = new Ant(new Position(0,0), new OneStep(), new Godlike());
-                //new Ant(new Position(0,0), new OneStep(), new Godlike());
 
-        Agent ant2 = new Ant(new Position(1,1), new OneStep(), new Godlike());
-
-
-        Thread t1 = new Thread(ant1);
-        Thread t2 = new Thread(ant2);
-
-        t1.start();
-        t2.start();
-
-
-        try{
-            sleep(10);
-        }
-        catch (Exception e){
-
-        }
         System.out.println(Thread.currentThread().getName());
 
+        ArrayList<Agent> ants = createAnts(10);
 
-         ExecutorService executor  = Executors.newCachedThreadPool();
+        for(int i = 0; i < 10; i++){
 
-         executor.submit(ant1);
-         executor.submit(ant2);
-         executor.submit(ant1);
-         executor.submit(ant2);
+            System.out.println("\n\n ===== Boucle "+ i +" ===== \n\n");
 
-        executor.shutdown();
+            ExecutorService executor = Executors.newCachedThreadPool();
 
-        try{
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            ants.forEach(executor::submit);
+
+            executor.shutdown();
+
+            try {
+                executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            }
+            catch (Exception e) {
+            }
+            finally {
+
+            }
+
         }
-        catch (Exception e){
+        System.out.println("tout fini lol");
 
-        }
-        finally {
-            System.out.println("tout fini lol");
-        }
+
 
 
 
@@ -137,5 +124,17 @@ public class App {
 
 
 
+    }
+
+
+
+    public static ArrayList<Agent> createAnts(int nb){
+
+        ArrayList<Agent> ants = new ArrayList<Agent>();
+
+        for(int i = 0; i < nb; i++){
+            ants.add(new Ant(new Position(i,i), new OneStep(), new Godlike()));
+        }
+        return ants;
     }
 }
