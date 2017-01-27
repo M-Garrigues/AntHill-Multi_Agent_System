@@ -185,6 +185,7 @@ public class Map {
 
         return false;
     }
+    /*
     public boolean checkPass (Cell cellSource){
 
         ArrayList<Cell> cellCheck = new ArrayList<Cell>();
@@ -220,6 +221,13 @@ public class Map {
 
         return false;
     }
+    */
+
+    public boolean checkPass (Position positionSource){
+
+        return false;
+    }
+
 
     public Cell getCellPosition (Position position){
         int posX = position.getX();
