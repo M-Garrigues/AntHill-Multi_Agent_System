@@ -39,6 +39,10 @@ public class Ant extends MobileAgent{
     }
 
 
+
+
+
+
     @Override
     public void run() {
 
@@ -54,6 +58,10 @@ public class Ant extends MobileAgent{
         this.move(map.getCellPosition(this.getPosition()), map.getCellPosition(new Position(position.getX() + 1, position.getY())));
 
     }
+
+
+
+
 
     public boolean hasFood() {
         return hasFood;
