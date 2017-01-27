@@ -5,6 +5,7 @@ import model.agents.vision.Godlike;
 import model.agents.vision.Vision;
 import model.elements.Element;
 import model.map.Cell;
+import model.map.Map;
 
 import java.util.ArrayList;
 
@@ -14,18 +15,23 @@ import java.util.ArrayList;
 public class Agent extends Element implements Runnable{
 
     protected Vision vision;
-    ArrayList<Cell> perceivedCells;
+    private ArrayList<Cell> perceivedCells;
+    private Map map;
+
+
 
     public Agent() {
         super(new Position(0,0));
         vision = new Godlike();
         perceivedCells = new ArrayList<>();
+        map = new Map(0,0);
     }
 
     public Agent(Position position) {
         super(position);
         vision = new Godlike();
         perceivedCells = new ArrayList<>();
+        map = new Map(0,0);
     }
 
 
@@ -47,6 +53,14 @@ public class Agent extends Element implements Runnable{
 
     public void setPerceivedCells(ArrayList<Cell> perceivedCells) {
         this.perceivedCells = perceivedCells;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
 

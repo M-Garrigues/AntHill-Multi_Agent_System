@@ -3,7 +3,10 @@ package model.agents.mobileAgent.ant;
 import model.Position;
 import model.agents.mobileAgent.MobileAgent;
 import model.agents.mobileAgent.movement.Movement;
+import model.agents.mobileAgent.movement.OneStep;
+import model.agents.vision.Sensors;
 import model.agents.vision.Vision;
+import model.map.Map;
 
 import java.util.ArrayList;
 
@@ -21,15 +24,34 @@ public class Ant extends MobileAgent{
         path = new ArrayList<>();
     }
 
-    public Ant(Position position, Movement movement, Vision vision){
+    public Ant(Map map, Position antHillPos){
+        super();
+
+        this.setMap(map);
+        this.setPosition(antHillPos);
+        this.movement = new OneStep();
+        this.vision = new Sensors();
+    }
+
+    public Ant(Map map, Position position, Movement movement, Vision vision){
         super(position, movement, vision);
+        this.setMap(map);
     }
 
 
     @Override
     public void run() {
-        System.out.println("======= "+ Thread.currentThread().getName() +"  ====  Mon id est "+ this.getClass() + " et ma position " + this.getPosition().getX() +";"+ this.getPosition().getY());
-        //this.move(map.getCellPosition);
+
+        Position position = this.getPosition();
+        Map map = this.getMap();
+
+
+        this.setPerceivedCells(this.vision.watch(map, position));
+
+        this.setMoveCells(this.movement.move(map, position));
+
+        System.out.println("======= "+ Thread.currentThread().getName() +"  ====  Mon id est "+ this.getClass() + " et ma position " + position.getX() +";"+ position.getY());
+        this.move(map.getCellPosition(this.getPosition()), map.getCellPosition(new Position(position.getX() + 1, position.getY())));
 
     }
 

@@ -13,7 +13,7 @@ public class MapView {
 
     Map map;
 
-    public MapView(Map map){
+    public MapView(model.map.Map map){
         this.map = map;
     }
 
@@ -45,5 +45,10 @@ public class MapView {
             System.out.print("\n");
         }
 
+    }
+
+
+    public void update(Map map){ // WILL PROBABLY HAVE TO CHANGE THIS ONE
+        this.map = map;
     }
 }
