@@ -1,5 +1,6 @@
 package model.agents.behaviour;
 
+import model.agents.Agent;
 import model.agents.mobileAgent.movement.Movement;
 import model.agents.vision.Godlike;
 import model.agents.vision.Vision;
@@ -9,5 +10,5 @@ import model.agents.vision.Vision;
  */
 public interface Behaviour {
 
-
+    public void act(Agent agent);
 }

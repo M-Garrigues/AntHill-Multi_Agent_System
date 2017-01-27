@@ -9,7 +9,7 @@ import model.map.Map;
  */
 public class Wander implements Behaviour {
 
-    public Cell wander(Map map, Position position){
+//    public Cell wander(Map map, Position position){
 
-    }
+    //}
 }

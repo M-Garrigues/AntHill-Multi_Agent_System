@@ -6,6 +6,7 @@ import model.agents.mobileAgent.movement.Movement;
 import model.agents.mobileAgent.movement.OneStep;
 import model.agents.vision.Sensors;
 import model.agents.vision.Vision;
+import model.map.Cell;
 import model.map.Map;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class Ant extends MobileAgent{
 
     private boolean hasFood;
-    private ArrayList<Position> path;
+    private ArrayList<Cell> path;
 
     public Ant (){
         super();
@@ -57,10 +58,10 @@ public class Ant extends MobileAgent{
         position = new Position(position.getX() + 1, position.getY());
         this.move(map.getCellPosition(this.getPosition()), map.getCellPosition(position));
 
-
         this.setPosition(position);
 
         System.out.println("======= "+ Thread.currentThread().getName() +"  ====  Mon id est "+ this.getClass() + " et ma position " + position.getX() +";"+ position.getY());
+
 
     }
 
@@ -80,11 +81,11 @@ public class Ant extends MobileAgent{
         this.hasFood = false;
     }
 
-    public ArrayList<Position> getPath() {
+    public ArrayList<Cell> getPath() {
         return path;
     }
 
-    public void setPath(ArrayList<Position> path) {
+    public void setPath(ArrayList<Cell> path) {
         this.path = path;
     }
 }
