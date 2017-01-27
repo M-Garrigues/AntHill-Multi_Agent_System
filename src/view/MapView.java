@@ -13,7 +13,7 @@ public class MapView {
 
     Map map;
 
-    public MapView(Map map){
+    public MapView(model.map.Map map){
         this.map = map;
     }
 
@@ -37,13 +37,20 @@ public class MapView {
                 else if (actualCell.isSource()){
                     System.out.print("o");
                 }
+                else if(actualCell.hasAnt()){
+                    System.out.print("A");
+                }
                 else{
                     System.out.print(" ");
                 }
             }
-
             System.out.print("\n");
         }
 
+    }
+
+
+    public void update(Map map){ // WILL PROBABLY HAVE TO CHANGE THIS ONE
+        this.map = map;
     }
 }

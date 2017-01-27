@@ -6,6 +6,7 @@ import model.agents.mobileAgent.ant.Ant;
 import model.agents.mobileAgent.movement.OneStep;
 import model.agents.vision.Godlike;
 import model.map.Map;
+import view.MapView;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -20,20 +21,23 @@ public class App {
     public static void main(String[] args)
     {
         boolean test;
-        Map map = new Map(2,2);
+        Map map = new Map(15,15);
         map.loadMap();
+
+        MapView view = new MapView(map);
+
         System.out.println(Runtime.getRuntime().availableProcessors());
 
 
         System.out.println(Thread.currentThread().getName());
 
-        ArrayList<Agent> ants = createAnts(10);
+        ArrayList<Agent> ants = createAnts(map, 10);
 
         for (Agent ant: ants) {
             map.getCellPosition(ant.getPosition()).addElement(ant); //adds the ant to the cell it belongs.
         }
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 1; i < 9; i++){
 
             System.out.println("\n\n ===== Boucle "+ i +" ===== \n\n");
 
@@ -51,6 +55,9 @@ public class App {
             finally {
 
             }
+
+            view.update(map);
+            view.printMap();
 
         }
         System.out.println("tout fini lol");
@@ -132,12 +139,12 @@ public class App {
 
 
 
-    public static ArrayList<Agent> createAnts(int nb){
+    public static ArrayList<Agent> createAnts(Map map, int nb){
 
         ArrayList<Agent> ants = new ArrayList<Agent>();
 
         for(int i = 0; i < nb; i++){
-            ants.add(new Ant(new Position(i,i), new OneStep(), new Godlike()));
+            ants.add(new Ant(map, new Position(0,i), new OneStep(), new Godlike()));
         }
         return ants;
     }

@@ -228,6 +228,26 @@ public class Cell {
         }
     }
 
+    public boolean hasAnt(){
+
+        readLock.lock();
+        boolean b = true;
+
+        try{
+            b = !elements.get(ElementType.Ant).isEmpty();
+        }
+        catch (Exception e){
+            b = true;
+            textError("Error on ant test.");
+        }
+        finally {
+            readLock.unlock();
+            return b;
+
+        }
+    }
+
+
     public Element getPheromone(){
 
         readLock.lock();
