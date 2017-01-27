@@ -37,7 +37,7 @@ public class App {
             map.getCellPosition(ant.getPosition()).addElement(ant); //adds the ant to the cell it belongs.
         }
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 1; i < 9; i++){
 
             System.out.println("\n\n ===== Boucle "+ i +" ===== \n\n");
 
