@@ -61,7 +61,20 @@ public class Ant extends MobileAgent{
         this.setPosition(position);
 
         System.out.println("======= "+ Thread.currentThread().getName() +"  ====  Mon id est "+ this.getClass() + " et ma position " + position.getX() +";"+ position.getY());
+    }
 
+
+    public void run2() {
+
+        Position position = this.getPosition();
+        Map map = this.getMap();
+
+
+        this.setPerceivedCells(this.vision.watch(map, position));
+
+        this.setMoveCells(this.movement.move(map, position));
+
+        this.behaviour.act(this);
 
     }
 

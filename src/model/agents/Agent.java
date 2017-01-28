@@ -1,6 +1,9 @@
 package model.agents;
 
 import model.Position;
+import model.agents.behaviour.Behaviour;
+import model.agents.behaviour.Fetch;
+import model.agents.behaviour.Stop;
 import model.agents.vision.Godlike;
 import model.agents.vision.Vision;
 import model.elements.Element;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 public class Agent extends Element implements Runnable{
 
     protected Vision vision;
+    protected Behaviour behaviour;
     private ArrayList<Cell> perceivedCells;
     private Map map;
 
@@ -23,6 +27,7 @@ public class Agent extends Element implements Runnable{
     public Agent() {
         super(new Position(0,0));
         vision = new Godlike();
+        behaviour = new Fetch();
         perceivedCells = new ArrayList<>();
         map = new Map(0,0);
     }
@@ -30,6 +35,7 @@ public class Agent extends Element implements Runnable{
     public Agent(Position position) {
         super(position);
         vision = new Godlike();
+        behaviour = new Fetch();
         perceivedCells = new ArrayList<>();
         map = new Map(0,0);
     }
