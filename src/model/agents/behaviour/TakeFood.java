@@ -10,7 +10,7 @@ import view.ErrorView;
 /**
  * Created by Mathieu on 28/01/2017.
  */
-public class TakeFood {
+public class TakeFood implements Behaviour{
 
     public TakeFood(){}
 
@@ -34,16 +34,20 @@ public class TakeFood {
 
         if(actualCell.isSource()){
             if(((Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0))).isUsable()){
+
                 ((Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0))).foodTaken();
+
+                ant.takeFood();
+
+                ant.setBehaviour(new Return()); // The agent has found food, it comes back.
+
             }
             else {
                 ant.setBehaviour(new Fetch()); // The agent can't take food on this source, he continues the fetching.
             }
         }
 
-        ant.takeFood();
 
-        ant.setBehaviour(new Return()); // The agent has found food, it comes back.
     }
 
 
