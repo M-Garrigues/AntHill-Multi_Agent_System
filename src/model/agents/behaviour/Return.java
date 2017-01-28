@@ -1,13 +1,11 @@
 package model.agents.behaviour;
 
 import model.agents.Agent;
-import model.agents.mobileAgent.MobileAgent;
 import model.agents.mobileAgent.ant.Ant;
 import model.elements.Pheromone;
 import model.map.Cell;
 import view.ErrorView;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -56,9 +54,20 @@ public class Return implements Behaviour {
                 i++;
             }
 
-            Pheromone pheromone = new Pheromone(startCell.getPosition(), 10);
-            startCell.addElement(pheromone);
+            if(!startCell.hasPheromone()){
+                Pheromone pheromone = new Pheromone(startCell.getPosition(), 10);
+                startCell.addElement(pheromone);
+            }
+            else{
+                int quantityPheromone = ((Pheromone)startCell.getPheromone()).getQuantity();
+                startCell.setPheromone(quantityPheromone + 10);
+            }
+
             ant.move(startCell, endCell);
+
+            if(endCell.isAntHill()){  //The agent is on an anthill, his state goes to dropFood.
+                agent.setBehaviour(new DropFood());
+            }
         }
     }
 }

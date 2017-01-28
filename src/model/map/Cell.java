@@ -125,6 +125,18 @@ public class Cell {
         }
     }
 
+    public void setPheromone(int value) {
+
+        writeLock.lock();
+
+        try{
+            ((Pheromone)this.elements.get(ElementType.Pheromone).get(0)).setQuantity(value);
+        }
+        finally {
+            writeLock.unlock();
+        }
+    }
+
 
 
 
