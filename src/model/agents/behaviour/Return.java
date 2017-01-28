@@ -14,6 +14,10 @@ import java.util.ArrayList;
  */
 public class Return implements Behaviour {
 
+    public Return(){
+
+    }
+
     public void act(Agent agent){
 
         Ant  ant = new Ant();
@@ -43,9 +47,6 @@ public class Return implements Behaviour {
             }
         }
 
-
-
         ant.move(startCell, endCell);
-
     }
 }
