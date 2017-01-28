@@ -46,7 +46,6 @@ public class Fetch implements Behaviour {
         if (source == true){
             ant.getPath().add(endCell);
             ant.move(actualCell, endCell);
-
             //Change behaviour to getFood
         }
         else {
