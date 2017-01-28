@@ -1,9 +1,82 @@
 package model.agents.behaviour;
 
+import model.Position;
+import model.agents.Agent;
+import model.agents.mobileAgent.ant.Ant;
+import model.map.Cell;
+import view.ErrorView;
+
+import java.util.ArrayList;
+
 /**
  * Created by Florian on 27/01/2017.
  */
 public class Fetch implements Behaviour {
 
+    public void act (Agent agent){
 
+        Ant ant = new Ant();
+
+        try{
+            ant = (Ant)agent;
+        }
+        catch (Exception e){
+            ErrorView.textError("Returning agent is not an Ant.");
+        }
+
+        ArrayList<Cell> movableCell = ant.getMoveCells();
+        ArrayList<Cell> path = ant.getPath();
+        ArrayList<Double> probabilityArray = new ArrayList<Double>();
+
+        Cell lastCell = path.get(path.size() - 1);
+        Cell actualCell =  agent.getMap().getCellPosition(agent.getPosition());//Cell who contain the ant
+        Cell nextCell = agent.getMap().nextCell(lastCell,actualCell); //Cell in front of the ant
+        Cell endCell = new Cell();
+
+
+        for (int i = 0 ; i < path.size() ; i++){
+            if (movableCell.contains(path.get(i))){
+                movableCell.remove(path.get(i));
+            }
+        }
+
+        // Probability for each possibleCell
+        for (int i = 0 ; i < movableCell.size() ; i++){
+            double probability;
+            int distance;
+            Cell cellCompare = movableCell.get(i);
+            Position positionCompare = cellCompare.getPosition();
+            if (nextCell.getPosition().isEqual(positionCompare)){
+                probability = 10;
+            }
+            else {
+                distance = nextCell.distance(cellCompare);
+                probability = 10 / (distance + 1);
+            }
+
+            probabilityArray.add(probability);
+        }
+
+        //Sum for all probability
+        double sumProbability = 0;
+
+        for (int i = 0 ; i < probabilityArray.size() ; i++){
+            sumProbability += probabilityArray.get(i);
+        }
+
+        //Generating random number to chose next cell
+        double testProbability = Math.random();
+        double cumulSum = 0;
+        for (int i = 0; i < probabilityArray.size() ; i++){
+
+            cumulSum += probabilityArray.get(i)/sumProbability;
+            if (testProbability <= cumulSum){
+                endCell = movableCell.get(i);
+            }
+        }
+
+        ant.move(actualCell,endCell);
+
+
+    }
 }

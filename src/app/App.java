@@ -20,6 +20,8 @@ import java.util.concurrent.TimeUnit;
 public class App {
     public static void main(String[] args)
     {
+
+        /*
         boolean test;
         Map map = new Map(15,15);
         map.loadMap();
@@ -62,9 +64,12 @@ public class App {
         }
         System.out.println("tout fini lol");
 
-
-
-
+*/
+        boolean test;
+        Map map = new Map(15,15);
+        map.loadMap();
+        boolean ok = map.getSources();
+        System.out.println("ok");
 
         //map.printMap();
 

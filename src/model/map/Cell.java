@@ -3,6 +3,7 @@ package model.map;
 import model.Position;
 import model.elements.Element;
 import model.elements.ElementType;
+import model.elements.Pheromone;
 
 import java.util.EnumMap;
 import java.util.concurrent.locks.Lock;
@@ -280,6 +281,19 @@ public class Cell {
             readLock.unlock();
         }
         return null;
+    }
+
+    public int distance (Cell compareCell){
+
+        int distance;
+        int posX = this.getPosition().getX();
+        int posY = this.getPosition().getY();
+        int compX = compareCell.getPosition().getX();
+        int compY = compareCell.getPosition().getY();
+
+        distance = Math.abs(posX - compX) + Math.abs(posY - compY);
+
+        return distance;
     }
 
 

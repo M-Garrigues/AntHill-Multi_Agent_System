@@ -175,55 +175,77 @@ public class Map {
         for (int i = 0; i< sizeX; i++){
             for (int j = 0; j< sizeY; j++){
 
+                ArrayList<Cell> cellChecked = new ArrayList<Cell>();
+                int counter = cellChecked.size();
                 Position actualPosition = new Position(i,j);
                 Cell actualCell = this.getCellPosition(actualPosition);
                 if (actualCell.isSource()){
-                    return checkPass(actualCell);
+                    return checkPass(actualCell,cellChecked,counter);
                 }
             }
         }
 
         return false;
     }
-    /*
-    public boolean checkPass (Cell cellSource){
+
+    public Cell nextCell (Cell lastCell, Cell actualCell){
+
+        int posX = actualCell.getPosition().getX();
+        int posY = actualCell.getPosition().getY();
+
+        int lastX = lastCell.getPosition().getX();
+        int lastY = lastCell.getPosition().getY();
+
+        int deltaX = posX - lastX;
+        int deltaY = posY - lastY;
+
+        int nextX = posX + deltaX;
+        int nextY = posY + deltaY;
+
+        Position nextPosition = new Position(nextX,nextY);
+        Cell nextCell = this.getCellPosition(nextPosition);
+
+        return nextCell;
+    }
+
+    public boolean checkPass (Cell cellSource, ArrayList<Cell> cellChecked,int sizeArray){
 
         ArrayList<Cell> cellCheck = new ArrayList<Cell>();
-        int posX = cellSource.getPosition().getX();
-        int posY = cellSource.getPosition().getY();
+        Position cellPosition = cellSource.getPosition();
+        int posX = cellPosition.getX();
+        int posY = cellPosition.getY();
 
-        for (int i = posX - 1; i <= posX + 1; i++){
-            for (int j = posY - 1; j <= posY + 1; j++){
+        for (int i = posX - 1 ; i < posX + 1 ; i++ ){
+            for (int j = posY - 1 ; j < posY + 1 ; j++){
 
-                Position actualPosition = new Position(i,j);
-                Cell actualCell = this.getCellPosition(actualPosition);
+                Position actualPosition = new Position (i,j);
+                Cell actualCell = new Cell(actualPosition);
+                boolean obstacle = actualCell.isObstacle();
+                boolean checked = cellChecked.contains(actualCell);
 
                 if (actualCell.isAntHill()){
-
+                    System.out.println("passe ici");
+                    //Fourmilliere trouvée = arret
                     return true;
                 }
 
-                else if (!actualCell.isObstacle()){
-
-                    cellCheck.add(actualCell);
-
+                else if (!obstacle && !checked){
+                    cellCheck.add(actualCell); //Array with cells to check
+                    cellChecked.add(actualCell); //Array with cells already checked
                 }
             }
         }
-
-        for (int k = 0; k < cellCheck.size(); k++){
-
-            if(checkPass(cellCheck.get(k))){
-
-                return true;
+        if (cellChecked.size() == sizeArray){
+            //Aucune cellule rajoutable = arret
+            return false;
+        }
+        else {
+            for (int k = 0; k < cellCheck.size(); k++){
+                boolean testMap = checkPass(cellCheck.get(k),cellChecked,cellChecked.size());
+                System.out.println("ici");
+                return testMap;
             }
         }
-
-        return false;
-    }
-    */
-
-    public boolean checkPass (Position positionSource){
 
         return false;
     }
