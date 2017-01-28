@@ -53,6 +53,10 @@ public class Agent extends Element implements Runnable{
         this.vision = vision;
     }
 
+    public void setBehaviour(Behaviour behaviour) {
+        this.behaviour = behaviour;
+    }
+
     public ArrayList<Cell> getPerceivedCells() {
         return perceivedCells;
     }

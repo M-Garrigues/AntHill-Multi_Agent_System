@@ -86,11 +86,11 @@ public class Ant extends MobileAgent{
         return hasFood;
     }
 
-    public void takeFood(boolean hasFood) {
+    public void takeFood() {
         this.hasFood = true;
     }
 
-    public void dropFood(boolean hasFood) {
+    public void dropFood() {
         this.hasFood = false;
     }
 
