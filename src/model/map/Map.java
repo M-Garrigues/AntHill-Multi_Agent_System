@@ -2,6 +2,7 @@ package model.map;
 
 import model.Position;
 import model.elements.AntHill;
+import model.elements.ElementType;
 import model.elements.Obstacle;
 import model.elements.Source;
 
@@ -34,7 +35,7 @@ public class Map {
     }
     public void loadMap (){
 
-        String filename = "data/map/maptext.txt";
+        String filename = "data/map/map.txt";
         FileReader fileReader;
         BufferedReader bufferedReader;
 
@@ -306,4 +307,11 @@ public class Map {
         this.positionAntHill = positionAntHill;
     }
 
+    public AntHill getAntHill(){
+        AntHill anthill;
+
+        anthill = (AntHill)(this.getCellPosition(this.positionAntHill).getElements().get(ElementType.fromString("AntHill"))).get(0);
+
+        return anthill;
+    }
 }
