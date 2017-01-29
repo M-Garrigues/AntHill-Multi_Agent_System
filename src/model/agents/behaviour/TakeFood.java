@@ -34,11 +34,15 @@ public class TakeFood implements Behaviour{
         System.out.println("I'm taking food!");
 
         if(actualCell.isSource()){
-            if(((Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0))).isUsable()){
-
-                ((Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0))).foodTaken();
+            Source source = (Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0));
+            if(source.isUsable()){
+                System.out.println("Path :"+ant.getPath().size());
+                source.foodTaken();
 
                 ant.takeFood();
+                if ((ant.getPath().size() < source.getFastway()) || (source.getFastway() == 0)){
+                    source.setFastway(ant.getPath().size());
+                }
 
                 ant.setBehaviour(new Return()); // The agent has found food, it comes back.
 

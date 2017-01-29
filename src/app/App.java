@@ -38,6 +38,8 @@ public class App {
         while(map.getAntHill().getFoodStack() < map.getFood() && i < 10000){
 
             System.out.println("\n\n ===== Boucle "+ i++ +" ===== \n\n");
+            map.reducePheromone();
+            System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
 
             //System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
 
@@ -48,9 +50,9 @@ public class App {
             //System.out.print("\033[H\033[2J");
             //System.out.flush();
         }
-        System.out.println("tout fini lol");
-
         System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
+
+        map.getSources();
 
         view.update(map);
         view.printMap();

@@ -9,12 +9,14 @@ public class Source extends Element {
 
     private boolean usable; // Indicates if the Source still has food to give.
     private int foodStack;
+    private int fastway;
 
 
     public Source(Position position, boolean usable, int foodStack) {
         super(position);
         this.usable = usable;
         this.foodStack = foodStack;
+        this.fastway = 0;
     }
 
 
@@ -46,10 +48,11 @@ public class Source extends Element {
         this.foodStack = foodStack;
     }
 
+    public synchronized int getFastway() {
+        return fastway;
+    }
 
-
-
-
-
-
+    public synchronized void setFastway(int fastway) {
+        this.fastway = fastway;
+    }
 }

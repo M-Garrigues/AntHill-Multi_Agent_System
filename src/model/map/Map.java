@@ -1,10 +1,7 @@
 package model.map;
 
 import model.Position;
-import model.elements.AntHill;
-import model.elements.ElementType;
-import model.elements.Obstacle;
-import model.elements.Source;
+import model.elements.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,15 +25,17 @@ public class Map {
     private int sizeY;
 
     public Map(int sizeX, int sizeY) {
+
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.food = 0;
         this.agents = new ArrayList<AgentList>();
         this.cells = new ArrayList<Cell>();
     }
+
     public void loadMap (){
 
-        String filename = "data/map/maptext.txt";
+        String filename = "data/map/map.txt";
         FileReader fileReader;
         BufferedReader bufferedReader;
 
@@ -179,22 +178,33 @@ public class Map {
 
         return false;
     }
-    public boolean getSources (){
+    public void getSources (){
 
         for (int i = 0; i< sizeX; i++){
             for (int j = 0; j< sizeY; j++){
 
                 ArrayList<Cell> cellChecked = new ArrayList<Cell>();
-                int counter = cellChecked.size();
                 Position actualPosition = new Position(i,j);
                 Cell actualCell = this.getCellPosition(actualPosition);
                 if (actualCell.isSource()){
-                    return checkPass(actualCell,cellChecked,counter);
+                    Source source = (Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0));
+                    System.out.println("Source fastest way :"+source.getFastway());
                 }
             }
         }
+    }
 
-        return false;
+    public void reducePheromone (){
+        for (int i = 0; i < this.getSizeX(); i++){
+            for (int j = 0; j < this.getSizeY(); j++){
+                Position actualPosition = new Position(i,j);
+                Cell actualCell = this.getCellPosition(actualPosition);
+                if (actualCell.hasPheromone()){
+                    int quantityPheromone = ((Pheromone)actualCell.getPheromone()).getQuantity();
+                    actualCell.setPheromone(quantityPheromone-1);
+                }
+            }
+        }
     }
 
     public Cell nextCell (Cell lastCell, Cell actualCell){
