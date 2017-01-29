@@ -237,49 +237,6 @@ public class Map {
         return nextCell;
     }
 
-    public boolean checkPass (Cell cellSource, ArrayList<Cell> cellChecked,int sizeArray){
-
-        ArrayList<Cell> cellCheck = new ArrayList<Cell>();
-        Position cellPosition = cellSource.getPosition();
-        int posX = cellPosition.getX();
-        int posY = cellPosition.getY();
-
-        for (int i = posX - 1 ; i < posX + 1 ; i++ ){
-            for (int j = posY - 1 ; j < posY + 1 ; j++){
-
-                Position actualPosition = new Position (i,j);
-                Cell actualCell = new Cell(actualPosition);
-                boolean obstacle = actualCell.isObstacle();
-                boolean checked = cellChecked.contains(actualCell);
-
-                if (actualCell.isAntHill()){
-                    System.out.println("passe ici");
-                    //Fourmilliere trouvée = arret
-                    return true;
-                }
-
-                else if (!obstacle && !checked){
-                    cellCheck.add(actualCell); //Array with cells to check
-                    cellChecked.add(actualCell); //Array with cells already checked
-                }
-            }
-        }
-        if (cellChecked.size() == sizeArray){
-            //Aucune cellule rajoutable = arret
-            return false;
-        }
-        else {
-            for (int k = 0; k < cellCheck.size(); k++){
-                boolean testMap = checkPass(cellCheck.get(k),cellChecked,cellChecked.size());
-                System.out.println("ici");
-                return testMap;
-            }
-        }
-
-        return false;
-    }
-
-
     public Cell getCellPosition (Position position){
         int posX = position.getX();
         int posY = position.getY();

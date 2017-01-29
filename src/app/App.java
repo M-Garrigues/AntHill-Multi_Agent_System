@@ -25,6 +25,7 @@ public class App {
         boolean test;
         Map map = new Map(15,15);
         map.loadMap();
+        System.out.println(map.checkMap());
         System.out.println("Manger total : "+map.getFood());
         MapView view = new MapView(map);
 
