@@ -75,12 +75,6 @@ public class Ant extends MobileAgent{
         if (this.getPerceivedCells().isEmpty()) {
             System.out.println("Pas de cases vues!");
         }
-        else{
-            for (Cell move: this.getPerceivedCells()
-                    ) {
-                System.out.println(move.getPosition().getX()+";"+move.getPosition().getY());
-            }
-        }
 
         this.setMoveCells(this.movement.move(map, position));
 

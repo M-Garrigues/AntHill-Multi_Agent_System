@@ -1,10 +1,10 @@
 package app;
 
-import model.Position;
 import model.agents.Agent;
 import model.agents.mobileAgent.ant.Ant;
 import model.agents.mobileAgent.movement.OneStep;
 import model.agents.vision.Sensors;
+import model.map.Cell;
 import model.map.Map;
 import view.MapView;
 
@@ -28,35 +28,18 @@ public class App {
 
         MapView view = new MapView(map);
 
-        System.out.println(Runtime.getRuntime().availableProcessors());
-
 
         System.out.println(Thread.currentThread().getName());
 
-        ArrayList<Agent> ants = createAnts(map, 1);
+        ArrayList<Agent> ants = createAnts(map, 4);
 
-        for (Agent ant: ants) {
-            map.getCellPosition(ant.getPosition()).addElement(ant); //adds the ant to the cell it belongs.
-        }
+
 
         for(int i = 1; i < 9; i++){
 
             System.out.println("\n\n ===== Boucle "+ i +" ===== \n\n");
 
-            ExecutorService executor = Executors.newCachedThreadPool();
-
-            ants.forEach(executor::submit);
-
-            executor.shutdown();
-
-            try {
-                executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-            }
-            catch (Exception e) {
-            }
-            finally {
-
-            }
+            runAgentsOnce(ants);
 
             view.update(map);
             view.printMap();
@@ -148,10 +131,37 @@ public class App {
     public static ArrayList<Agent> createAnts(Map map, int nb){
 
         ArrayList<Agent> ants = new ArrayList<Agent>();
-
-        for(int i = 0; i < nb; i++){
-            ants.add(new Ant(map, new Position(3,1), new OneStep(), new Sensors()));
+        for (Cell cell: map.getCells() //WILL PROBABLY HAVE TO CHANGE THIS AND STORE THE ANTHILL POSITION IN MAP
+             ) {
+            if(cell.isAntHill()){
+                for(int i = 0; i < nb; i++){
+                    ants.add(new Ant(map, cell.getPosition(), new OneStep(), new Sensors()));
+                }
+            }
         }
+
+        for (Agent ant: ants) {
+            map.getCellPosition(ant.getPosition()).addElement(ant); //adds the ant to the cell it belongs.
+        }
+
         return ants;
+    }
+
+
+    public static void runAgentsOnce(ArrayList<Agent> ants){
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        ants.forEach(executor::submit);
+
+        executor.shutdown();
+
+        try {
+            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        }
+        catch (Exception e) {
+        }
+        finally {
+
+        }
     }
 }
