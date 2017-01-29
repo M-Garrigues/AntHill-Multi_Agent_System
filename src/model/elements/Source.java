@@ -7,7 +7,7 @@ import model.Position;
  */
 public class Source extends Element {
 
-    private boolean usable;
+    private boolean usable; // Indicates if the Source still has food to give.
     private int foodStack;
 
 

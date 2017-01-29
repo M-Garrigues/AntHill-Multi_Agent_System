@@ -1,6 +1,5 @@
 package model.map;
 
-import app.Settings;
 import model.Position;
 import model.elements.AntHill;
 import model.elements.Obstacle;
@@ -18,6 +17,10 @@ public class Map {
 
     private ArrayList<AgentList> agents;
     private ArrayList<Cell> cells;
+
+    private Position positionAntHill;
+
+
 
     private int sizeX;
     private int sizeY;
@@ -109,7 +112,9 @@ public class Map {
                 case 'x' :
                     AntHill antHill = new AntHill(actualPosition,40);
                     actualCell.addElement(antHill);
-                    System.out.println(actualPosition.getX() + " : "+actualPosition.getY());
+
+                    positionAntHill = actualPosition;
+
                     break;
 
                 case 'o' :
@@ -291,6 +296,14 @@ public class Map {
 
     public void setSizeY(int sizeY) {
         this.sizeY = sizeY;
+    }
+
+    public Position getPositionAntHill() {
+        return positionAntHill;
+    }
+
+    public void setPositionAntHill(Position positionAntHill) {
+        this.positionAntHill = positionAntHill;
     }
 
 }

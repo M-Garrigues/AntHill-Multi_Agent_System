@@ -11,6 +11,12 @@ import java.util.ArrayList;
  */
 public interface Vision {
 
+    /*
+        The Vision interface is what gives the Agent the cells it can interact with.
+        For example, is an Agent Vision is Godlike, it will be able to "have" and analyze the whole map.
+        If it has Sensors, it will only have in parameter the 8 cells around it.
+     */
+
     public ArrayList<Cell> watch(Map map, Position pos);
 
 }

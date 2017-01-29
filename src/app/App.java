@@ -1,10 +1,10 @@
 package app;
 
+import model.Position;
 import model.agents.Agent;
 import model.agents.mobileAgent.ant.Ant;
 import model.agents.mobileAgent.movement.OneStep;
 import model.agents.vision.Sensors;
-import model.map.Cell;
 import model.map.Map;
 import view.MapView;
 
@@ -131,14 +131,12 @@ public class App {
     public static ArrayList<Agent> createAnts(Map map, int nb){
 
         ArrayList<Agent> ants = new ArrayList<Agent>();
-        for (Cell cell: map.getCells() //WILL PROBABLY HAVE TO CHANGE THIS AND STORE THE ANTHILL POSITION IN MAP
-             ) {
-            if(cell.isAntHill()){
-                for(int i = 0; i < nb; i++){
-                    ants.add(new Ant(map, cell.getPosition(), new OneStep(), new Sensors()));
-                }
-            }
+        Position posAntHill = map.getPositionAntHill();
+        for(int i = 0; i < nb; i++){
+            ants.add(new Ant(map, posAntHill, new OneStep(), new Sensors())); // All the Ants are created in the Anthill.
         }
+
+
 
         for (Agent ant: ants) {
             map.getCellPosition(ant.getPosition()).addElement(ant); //adds the ant to the cell it belongs.

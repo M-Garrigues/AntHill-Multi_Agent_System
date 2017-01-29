@@ -11,6 +11,8 @@ public enum ElementType {
     Source,
     Ant;
 
+    // THIS ENUM MUST BE COMPLETED EACH TIME A NEW ELEMENT CLASS IS CREATED.
+
 public static ElementType fromString(String text){
     return valueOf(text);
 }

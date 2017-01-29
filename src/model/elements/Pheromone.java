@@ -7,7 +7,7 @@ import model.Position;
  */
 public class Pheromone extends Element{
 
-    private int quantity;
+    private int quantity; // The quantity of pheromone on a cell.
 
     public Pheromone(Position position, int quantity) {
         super(position);
