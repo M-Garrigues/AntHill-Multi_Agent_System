@@ -1,6 +1,7 @@
 package model.map;
 
 import model.Position;
+import model.agents.Agent;
 import model.elements.*;
 
 import java.io.BufferedReader;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
  */
 public class Map {
 
-    private ArrayList<AgentList> agents;
     private ArrayList<Cell> cells;
 
     private Position positionAntHill;
@@ -29,7 +29,6 @@ public class Map {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.food = 0;
-        this.agents = new ArrayList<AgentList>();
         this.cells = new ArrayList<Cell>();
     }
 
@@ -289,14 +288,6 @@ public class Map {
     }
 
 
-
-    public ArrayList<AgentList> getAgents() {
-        return agents;
-    }
-
-    public void setAgents(ArrayList<AgentList> agents) {
-        this.agents = agents;
-    }
 
     public ArrayList<Cell> getCells() {
         return cells;
