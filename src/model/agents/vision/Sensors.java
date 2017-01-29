@@ -19,7 +19,7 @@ public class Sensors implements Vision{ // This vision class allows the agent to
         Position posTemp = new Position();
 
         for(int i = seeX; i < seeX + 3; i++){ //This double for adds a square of 9 cells to viewedCells, with the given position as the centre.
-            for(int j = seeY; j < seeY; j++){
+            for(int j = seeY; j < seeY + 3; j++){
                 posTemp.setX(i);
                 posTemp.setY(j);
                 viewedCells.add(map.getCellPosition(posTemp));

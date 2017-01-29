@@ -4,7 +4,7 @@ import model.Position;
 import model.agents.Agent;
 import model.agents.mobileAgent.ant.Ant;
 import model.agents.mobileAgent.movement.OneStep;
-import model.agents.vision.Godlike;
+import model.agents.vision.Sensors;
 import model.map.Map;
 import view.MapView;
 
@@ -150,7 +150,7 @@ public class App {
         ArrayList<Agent> ants = new ArrayList<Agent>();
 
         for(int i = 0; i < nb; i++){
-            ants.add(new Ant(map, new Position(2,2), new OneStep(), new Godlike()));
+            ants.add(new Ant(map, new Position(2,2), new OneStep(), new Sensors()));
         }
         return ants;
     }
