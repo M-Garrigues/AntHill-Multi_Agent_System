@@ -38,7 +38,7 @@ public class App {
 
             System.out.println("\n\n ===== Boucle "+ i++ +" ===== \n\n");
             map.reducePheromone();
-            System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
+            //System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
 
             //System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
 
@@ -50,7 +50,6 @@ public class App {
             //System.out.flush();
         }
         System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
-
         int[]sources = map.getSources();
         System.out.println("Sources found : "+sources[0]+" on "+sources[1]);
 
