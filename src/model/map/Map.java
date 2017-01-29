@@ -2,7 +2,6 @@ package model.map;
 
 import model.Position;
 import model.elements.AntHill;
-import model.elements.ElementType;
 import model.elements.Obstacle;
 import model.elements.Source;
 
@@ -20,6 +19,7 @@ public class Map {
     private ArrayList<Cell> cells;
 
     private Position positionAntHill;
+    private int food;
 
 
 
@@ -29,7 +29,7 @@ public class Map {
     public Map(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-
+        this.food = 0;
         this.agents = new ArrayList<AgentList>();
         this.cells = new ArrayList<Cell>();
     }
@@ -123,6 +123,7 @@ public class Map {
                     Source source = new Source(actualPosition,true,foodStack);
                     actualCell.addElement(source);
                     numberSources--;
+                    this.food += foodStack;
                     break;
             }
 
@@ -307,11 +308,11 @@ public class Map {
         this.positionAntHill = positionAntHill;
     }
 
-    public AntHill getAntHill(){
-        AntHill anthill;
+    public int getFood() {
+        return food;
+    }
 
-        anthill = (AntHill)(this.getCellPosition(this.positionAntHill).getElements().get(ElementType.fromString("AntHill"))).get(0);
-
-        return anthill;
+    public void setFood(int food) {
+        this.food = food;
     }
 }
