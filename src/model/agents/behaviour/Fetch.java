@@ -34,12 +34,18 @@ public class Fetch implements Behaviour {
 
 
         ArrayList<Double> probabilityArray = new ArrayList<Double>();
-
-
-        Cell lastCell = new Cell(new Position(1,1));//path.get(path.size() - 1);
+        Cell lastCell = new Cell();
         Cell actualCell =  agent.getMap().getCellPosition(agent.getPosition());//Cell who contain the ant
 
-        if(actualCell.isAntHill()) System.out.println("I'm in the anthill!");
+        if (actualCell.isAntHill()){
+            System.out.println("I'm the antHill");
+            lastCell = actualCell;
+        }
+        else {
+            lastCell = path.get(path.size() - 1);
+        }
+
+
         Cell nextCell = agent.getMap().nextCell(lastCell,actualCell); //Cell in front of the ant
         Cell endCell = new Cell();
 
@@ -49,32 +55,35 @@ public class Fetch implements Behaviour {
                 source = true;
                 endCell = movableCell.get(i);
             }
+            System.out.println("Cellule 1:"+movableCell.get(i).getPosition().getX()+" : "+movableCell.get(i).getPosition().getY());
         }
         if (source == true){
             ant.getPath().add(endCell);
             ant.move(actualCell, endCell);
-            //Change behaviour to getFood
+            ant.setBehaviour(new TakeFood());
+            System.out.println("Takefood");
         }
         else {
-
             //Choose a new cell
 
-            for (int i = 0; i < path.size(); i++) {
-                if (movableCell.contains(path.get(i))) {
-                    movableCell.remove(path.get(i));
-                    //Ant don't come back on her path
-                }
-            }
-            if (movableCell.isEmpty()) {
+            /*if (movableCell.contains(lastCell)){
+                movableCell.remove(lastCell);
+            }*/
 
+            System.out.println("ifelse");
+
+            if (movableCell.isEmpty()) {
+                System.out.println("tableau vide");
                 ant.getPath().add(lastCell);
                 ant.move(actualCell, lastCell);
                 //If there is no possibility to move , go back
             } else {
 
+                System.out.println("ici");
+                System.out.println(movableCell.size());
                 // Probability for each possibleCell
                 for (int i = 0; i < movableCell.size(); i++) {
-
+                    System.out.println("la");
                     double probability;
                     int distance;
 
@@ -86,22 +95,29 @@ public class Fetch implements Behaviour {
                     Pheromone pheromone = (Pheromone) pheromoneElement;
 
                     if (nextCell.getPosition().isEqual(positionCompare)) {
+                        System.out.println("lalalalala");
                         probability = 10; //orientation
                         probability += pheromone.getQuantity(); //pheromone
 
                     } else {
+                        System.out.println("xaxaxaxaxa");
                         distance = nextCell.distance(cellCompare);
+                        System.out.println("Distance :"+distance);
                         probability = 10 / (distance + 1); //orientation
+                        System.out.println("Pheromone :"+pheromone.getQuantity());
                         probability += pheromone.getQuantity(); //pheromone
                     }
 
                     probabilityArray.add(probability);
+                    System.out.println("proba ? : "+probability);
                 }
 
                 //Sum for all probability
                 double sumProbability = 0;
 
                 for (int i = 0; i < probabilityArray.size(); i++) {
+
+                    System.out.println("Proba cellule : "+i+" : "+probabilityArray.get(i));
 
                     sumProbability += probabilityArray.get(i);
                 }

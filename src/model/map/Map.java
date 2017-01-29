@@ -109,6 +109,7 @@ public class Map {
                 case 'x' :
                     AntHill antHill = new AntHill(actualPosition,40);
                     actualCell.addElement(antHill);
+                    System.out.println(actualPosition.getX() + " : "+actualPosition.getY());
                     break;
 
                 case 'o' :
