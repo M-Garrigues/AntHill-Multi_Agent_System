@@ -49,6 +49,8 @@ public class Return implements Behaviour {
                     Cell cellPath = path.get(i);
                     Cell cellMove = path.get(j);
                     if (cellPath.getPosition().isEqual(cellMove.getPosition())) {
+                        System.out.println("je passe ici");
+
                         endCell = cellPath;
                         newPath = false;
                     }

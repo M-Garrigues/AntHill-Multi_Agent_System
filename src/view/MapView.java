@@ -31,14 +31,14 @@ public class MapView {
                 if (actualCell.isObstacle()){
                     System.out.print("#");
                 }
+                else if(actualCell.hasAnt()) {
+                    System.out.print("A");
+                }
                 else if (actualCell.isAntHill()){
                     System.out.print("x");
                 }
                 else if (actualCell.isSource()){
                     System.out.print("o");
-                }
-                else if(actualCell.hasAnt()){
-                    System.out.print("A");
                 }
                 else{
                     System.out.print(" ");

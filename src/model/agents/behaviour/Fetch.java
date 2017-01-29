@@ -40,9 +40,16 @@ public class Fetch implements Behaviour {
         if (actualCell.isAntHill()){
             System.out.println("I'm the antHill");
             lastCell = actualCell;
+            path.add(lastCell);
         }
         else {
             lastCell = path.get(path.size() - 1);
+        }
+
+        for (int i=0; i< path.size(); i++){
+            if (movableCell.contains(path.get(i))){
+                movableCell.remove(path.get(i));
+            }
         }
 
 
@@ -66,19 +73,15 @@ public class Fetch implements Behaviour {
         else {
             //Choose a new cell
 
-            if (movableCell.contains(lastCell)){
-                movableCell.remove(lastCell);
-            }
-
 
             if (movableCell.isEmpty()) {
                 System.out.println("tableau vide");
-                ant.getPath().add(lastCell);
+                System.out.println("Prochaine cellule : "+lastCell.getPosition().getX()+" ; "+lastCell.getPosition().getY());
                 ant.move(actualCell, lastCell);
+                ant.getPath().remove(lastCell);
                 //If there is no possibility to move , go back
             } else {
 
-                System.out.println(movableCell.size());
                 // Probability for each possibleCell
                 for (int i = 0; i < movableCell.size(); i++) {
                     double probability;
@@ -119,15 +122,11 @@ public class Fetch implements Behaviour {
                 double sumProbability = 0;
 
                 for (int i = 0; i < probabilityArray.size(); i++) {
-
-                    System.out.println("Proba cellule : "+i+" : "+probabilityArray.get(i));
-
                     sumProbability += probabilityArray.get(i);
                 }
 
                 //Generating random number to chose next cell
                 double testProbability = Math.random();
-                System.out.println("Random : " +testProbability);
                 double cumulSum = 0;
                 int i = 0;
                 boolean newCell = true;
@@ -135,11 +134,8 @@ public class Fetch implements Behaviour {
                 while ((i < probabilityArray.size())&& newCell) {
 
                     cumulSum += probabilityArray.get(i) / sumProbability;
-                    System.out.println("Somme = " +cumulSum);
-                    System.out.println("Proba = " +testProbability);
 
                     if (testProbability <= cumulSum) {
-                        System.out.println("Je passe ici");
                         endCell = movableCell.get(i);
                         newCell = false;
                     }
@@ -147,9 +143,10 @@ public class Fetch implements Behaviour {
                 }
                 System.out.println("Prochaine cellule : "+endCell.getPosition().getX()+" ; "+endCell.getPosition().getY());
 
-                System.out.println("BITE" + ant.getPath());
                 ant.getPath().add(endCell);
+                System.out.println("cellule ajoutée deplace toi !");
                 ant.move(actualCell, endCell);
+
             }
         }
 
