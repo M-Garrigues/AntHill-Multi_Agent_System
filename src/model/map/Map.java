@@ -19,6 +19,7 @@ public class Map {
     private ArrayList<Cell> cells;
 
     private Position positionAntHill;
+    private int food;
 
 
 
@@ -28,13 +29,13 @@ public class Map {
     public Map(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-
+        this.food = 0;
         this.agents = new ArrayList<AgentList>();
         this.cells = new ArrayList<Cell>();
     }
     public void loadMap (){
 
-        String filename = "data/map/maptext.txt";
+        String filename = "data/map/map.txt";
         FileReader fileReader;
         BufferedReader bufferedReader;
 
@@ -122,6 +123,7 @@ public class Map {
                     Source source = new Source(actualPosition,true,foodStack);
                     actualCell.addElement(source);
                     numberSources--;
+                    this.food += foodStack;
                     break;
             }
 
@@ -306,4 +308,11 @@ public class Map {
         this.positionAntHill = positionAntHill;
     }
 
+    public int getFood() {
+        return food;
+    }
+
+    public void setFood(int food) {
+        this.food = food;
+    }
 }
