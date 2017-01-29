@@ -44,8 +44,7 @@ public class Ant extends MobileAgent{
 
 
 
-    @Override
-    public void run() {
+    public void run2() {
 
         Position position = this.getPosition();
         Map map = this.getMap();
@@ -64,7 +63,8 @@ public class Ant extends MobileAgent{
     }
 
 
-    public void run2() {
+    @Override
+    public void run() {
 
         Position position = this.getPosition();
         Map map = this.getMap();
@@ -73,6 +73,16 @@ public class Ant extends MobileAgent{
         this.setPerceivedCells(this.vision.watch(map, position));
 
         this.setMoveCells(this.movement.move(map, position));
+
+        if (this.getMoveCells().isEmpty()) {
+            System.out.println("Pas de déplacement possible!");
+        }
+        else{
+            for (Cell move: this.getMoveCells()
+                    ) {
+                System.out.println(move.getPosition().getX()+";"+move.getPosition().getY());
+            }
+        }
 
         this.behaviour.act(this);
 

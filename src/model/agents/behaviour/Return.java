@@ -27,6 +27,8 @@ public class Return implements Behaviour {
             ErrorView.textError("Returning agent is not an Ant.");
         }
 
+        System.out.println("I'm returning home!");
+
         Cell startCell = agent.getMap().getCellPosition(agent.getPosition());
         Cell endCell = new Cell();
 

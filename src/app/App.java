@@ -33,7 +33,7 @@ public class App {
 
         System.out.println(Thread.currentThread().getName());
 
-        ArrayList<Agent> ants = createAnts(map, 10);
+        ArrayList<Agent> ants = createAnts(map, 1);
 
         for (Agent ant: ants) {
             map.getCellPosition(ant.getPosition()).addElement(ant); //adds the ant to the cell it belongs.
@@ -150,7 +150,7 @@ public class App {
         ArrayList<Agent> ants = new ArrayList<Agent>();
 
         for(int i = 0; i < nb; i++){
-            ants.add(new Ant(map, new Position(0,i), new OneStep(), new Godlike()));
+            ants.add(new Ant(map, new Position(2,2), new OneStep(), new Godlike()));
         }
         return ants;
     }

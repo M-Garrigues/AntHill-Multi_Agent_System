@@ -31,6 +31,7 @@ public class TakeFood implements Behaviour{
         }
 
 
+        System.out.println("I'm taking food!");
 
         if(actualCell.isSource()){
             if(((Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0))).isUsable()){

@@ -26,8 +26,22 @@ public class Fetch implements Behaviour {
             ErrorView.textError("Returning agent is not an Ant.");
         }
 
+        System.out.println("I'm fetching!");
+
         ArrayList<Cell> movableCell = ant.getMoveCells();
         ArrayList<Cell> path = ant.getPath();
+
+
+        if (movableCell.isEmpty()) {
+            System.out.println("Pas de déplacement possible!");
+        }
+        else{
+            for (Cell move: movableCell
+                    ) {
+                System.out.println(move.getPosition().getX()+";"+move.getPosition().getY());
+            }
+        }
+
 
         ArrayList<Double> probabilityArray = new ArrayList<Double>();
 

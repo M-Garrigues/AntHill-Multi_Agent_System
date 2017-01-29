@@ -26,7 +26,9 @@ public class DropFood implements Behaviour {
             ErrorView.textError("Can't take food as this agent doesn't carry any.");
         }
 
-        if (actualCell.isAntHill()){
+        System.out.println("I'm droping food!");
+
+        if (actualCell.isAntHill() && ant.hasFood()){
             ant.dropFood();
             Element antHillElement = actualCell.getElements().get(ElementType.AntHill).get(0);
             AntHill antHill = (AntHill) antHillElement;
