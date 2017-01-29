@@ -26,14 +26,20 @@ public class DropFood implements Behaviour {
             ErrorView.textError("Can't take food as this agent doesn't carry any.");
         }
 
-        System.out.println("I'm droping food!");
+        if(ant.hasFood())
+            System.out.println(ant + ": I'm droping food!");
+        else{
+            System.out.println(ant + ": I am home, let's fetch again!");
+        }
 
         if (actualCell.isAntHill() && ant.hasFood()){
             ant.dropFood();
             Element antHillElement = actualCell.getElements().get(ElementType.AntHill).get(0);
             AntHill antHill = (AntHill) antHillElement;
             antHill.getFood();
-            ant.setBehaviour(new Fetch());
         }
+
+        ant.setBehaviour(new Fetch());
+
     }
 }

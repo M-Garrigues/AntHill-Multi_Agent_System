@@ -26,7 +26,7 @@ public class Fetch implements Behaviour {
             ErrorView.textError("Returning agent is not an Ant.");
         }
 
-        System.out.println("I'm fetching!");
+        System.out.println(ant + ": I'm fetching!");
 
         ArrayList<Cell> movableCell = ant.getMoveCells();
         ArrayList<Cell> path = ant.getPath();
@@ -35,7 +35,7 @@ public class Fetch implements Behaviour {
 
         ArrayList<Double> probabilityArray = new ArrayList<Double>();
         Cell lastCell = new Cell();
-        Cell actualCell =  agent.getMap().getCellPosition(agent.getPosition());//Cell who contain the ant
+        Cell actualCell =  agent.getMap().getCellPosition(agent.getPosition());//Cell which contains the ant
 
         if (actualCell.isAntHill()){
             System.out.println("I'm the antHill");
@@ -75,11 +75,13 @@ public class Fetch implements Behaviour {
 
 
             if (movableCell.isEmpty()) {
-                System.out.println("tableau vide");
+                /*System.out.println("tableau vide");
                 System.out.println("Prochaine cellule : "+lastCell.getPosition().getX()+" ; "+lastCell.getPosition().getY());
                 ant.move(actualCell, lastCell);
-                ant.getPath().remove(lastCell);
+                ant.getPath().remove(lastCell);*/
                 //If there is no possibility to move , go back
+
+                agent.setBehaviour(new Return());
             } else {
 
                 // Probability for each possibleCell
