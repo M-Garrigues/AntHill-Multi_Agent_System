@@ -14,7 +14,6 @@ public class Pheromone extends Element{
         this.quantity = quantity;
     }
 
-
     public synchronized void tick(){
         this.quantity--;
     }
@@ -32,3 +31,4 @@ public class Pheromone extends Element{
         this.quantity = quantity;
     }
 }
+

@@ -261,12 +261,12 @@ public class Cell {
     }
 
 
-    public Element getPheromone(){
+    public Pheromone getPheromone(){
 
         readLock.lock();
 
         try{
-            return elements.get(ElementType.Pheromone).get(0);
+            return (Pheromone)elements.get(ElementType.Pheromone).get(0);
         }
         catch(Exception e){
             textError("get pheromone on empty cell.");
