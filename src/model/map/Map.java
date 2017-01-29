@@ -209,10 +209,8 @@ public class Map {
                 Cell actualCell = this.getCellPosition(actualPosition);
                 if (actualCell.hasPheromone()){
                     int quantityPheromone = ((Pheromone)actualCell.getPheromone()).getQuantity();
-                    if (quantityPheromone-1 == 0){
-                        actualCell.deleteElement((Pheromone)actualCell.getPheromone());
-                    }
-                    else{
+                    if (quantityPheromone != 0){
+                        //actualCell.deleteElement((Pheromone)actualCell.getPheromone());
                         ((Pheromone)actualCell.getPheromone()).setQuantity(quantityPheromone-1);
                     }
                 }

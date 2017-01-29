@@ -69,7 +69,7 @@ public class Return implements Behaviour {
             else if(startCell.hasPheromone() && ant.hasFood()) {
                 //System.out.println("Je pose des phéromones");
                 int quantityPheromone = ((Pheromone)startCell.getPheromone()).getQuantity();
-                startCell.setPheromone(quantityPheromone + 10);
+                startCell.setPheromone(quantityPheromone + 100);
             }
             else{
                 //System.out.println("Je ne pose pas de phéromone parceque je suis un déchet");

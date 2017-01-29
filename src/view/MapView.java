@@ -62,7 +62,7 @@ public class MapView {
                     }
 
                 }
-                else if(actualCell.hasPheromone()){
+                else if((actualCell.hasPheromone())&&(actualCell.getPheromone().getQuantity() != 0)){
 
                     int qt = actualCell.getPheromone().getQuantity();
                     double result = 1/2 * Math.log(qt);
