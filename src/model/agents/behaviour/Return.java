@@ -27,7 +27,7 @@ public class Return implements Behaviour {
             ErrorView.textError("Returning agent is not an Ant.");
         }
 
-        System.out.println("I'm returning home!");
+        //System.out.println("I'm returning home!");
 
         Cell startCell = agent.getMap().getCellPosition(agent.getPosition());
         Cell endCell = new Cell();
@@ -60,22 +60,22 @@ public class Return implements Behaviour {
 
             endCell= path.get(path.size()-1);
             ant.getPath().remove(path.size()-1);
-            System.out.println(startCell.hasPheromone());
+            //System.out.println(startCell.hasPheromone());
             if(!startCell.hasPheromone() && ant.hasFood()){
-                System.out.println("Je pose des phéromones");
+               // System.out.println("Je pose des phéromones");
                 Pheromone pheromone = new Pheromone(startCell.getPosition(), 10);
                 startCell.addElement(pheromone);
             }
             else if(startCell.hasPheromone() && ant.hasFood()) {
-                System.out.println("Je pose des phéromones");
+                //System.out.println("Je pose des phéromones");
                 int quantityPheromone = ((Pheromone)startCell.getPheromone()).getQuantity();
                 startCell.setPheromone(quantityPheromone + 10);
             }
             else{
-                System.out.println("Je ne pose pas de phéromone parceque je suis un déchet");
+                //System.out.println("Je ne pose pas de phéromone parceque je suis un déchet");
             }
 
-            System.out.println("Prochaine cellule : "+endCell.getPosition().getX()+" ; "+endCell.getPosition().getY());
+            //System.out.println("Prochaine cellule : "+endCell.getPosition().getX()+" ; "+endCell.getPosition().getY());
             ant.move(startCell, endCell);
 
             if(endCell.isAntHill()){  //The agent is on an anthill, his state goes to dropFood.

@@ -5,7 +5,6 @@ import model.agents.Agent;
 import model.agents.mobileAgent.ant.Ant;
 import model.agents.mobileAgent.movement.OneStep;
 import model.agents.vision.Sensors;
-import model.elements.ElementType;
 import model.map.Map;
 import view.MapView;
 
@@ -32,21 +31,29 @@ public class App {
 
         System.out.println(Thread.currentThread().getName());
 
-        ArrayList<Agent> ants = createAnts(map, 1);
+        ArrayList<Agent> ants = createAnts(map, 20);
         int i = 0;
 
 
-        while(map.getAntHill().getFoodStack() < map.food){
+        while(map.getAntHill().getFoodStack() < map.getFood() && i < 10000){
 
             System.out.println("\n\n ===== Boucle "+ i++ +" ===== \n\n");
 
+            //System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
+
             runAgentsOnce(ants);
 
-            view.update(map);
-            view.printMap();
-
+            //view.update(map);
+            //view.printMap();
+            //System.out.print("\033[H\033[2J");
+            //System.out.flush();
         }
         System.out.println("tout fini lol");
+
+        System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
+
+        view.update(map);
+        view.printMap();
 
 
         /*

@@ -26,7 +26,7 @@ public class Fetch implements Behaviour {
             ErrorView.textError("Returning agent is not an Ant.");
         }
 
-        System.out.println(ant + ": I'm fetching!");
+        //System.out.println(ant + ": I'm fetching!");
 
         ArrayList<Cell> movableCell = ant.getMoveCells();
         ArrayList<Cell> path = ant.getPath();
@@ -38,7 +38,7 @@ public class Fetch implements Behaviour {
         Cell actualCell =  agent.getMap().getCellPosition(agent.getPosition());//Cell which contains the ant
 
         if (actualCell.isAntHill()){
-            System.out.println("I'm the antHill");
+           // System.out.println("I'm the antHill");
             lastCell = actualCell;
             path.add(lastCell);
         }
@@ -62,13 +62,13 @@ public class Fetch implements Behaviour {
                 source = true;
                 endCell = movableCell.get(i);
             }
-            System.out.println("Cellule "+ i + ": "+movableCell.get(i).getPosition().getX()+" ; "+movableCell.get(i).getPosition().getY());
+            //System.out.println("Cellule "+ i + ": "+movableCell.get(i).getPosition().getX()+" ; "+movableCell.get(i).getPosition().getY());
         }
         if (source == true){
             ant.getPath().add(endCell);
             ant.move(actualCell, endCell);
             ant.setBehaviour(new TakeFood());
-            System.out.println("Takefood");
+           // System.out.println("Takefood");
         }
         else {
             //Choose a new cell
@@ -143,10 +143,10 @@ public class Fetch implements Behaviour {
                     }
                     i++;
                 }
-                System.out.println("Prochaine cellule : "+endCell.getPosition().getX()+" ; "+endCell.getPosition().getY());
+                //System.out.println("Prochaine cellule : "+endCell.getPosition().getX()+" ; "+endCell.getPosition().getY());
 
                 ant.getPath().add(endCell);
-                System.out.println("cellule ajoutée deplace toi !");
+                //System.out.println("cellule ajoutée deplace toi !");
                 ant.move(actualCell, endCell);
 
             }
