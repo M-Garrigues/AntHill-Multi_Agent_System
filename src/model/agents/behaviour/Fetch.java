@@ -32,21 +32,14 @@ public class Fetch implements Behaviour {
         ArrayList<Cell> path = ant.getPath();
 
 
-        if (movableCell.isEmpty()) {
-            System.out.println("Pas de déplacement possible!");
-        }
-        else{
-            for (Cell move: movableCell
-                    ) {
-                System.out.println(move.getPosition().getX()+";"+move.getPosition().getY());
-            }
-        }
-
 
         ArrayList<Double> probabilityArray = new ArrayList<Double>();
 
         Cell lastCell = path.get(path.size() - 1);
         Cell actualCell =  agent.getMap().getCellPosition(agent.getPosition());//Cell who contain the ant
+
+
+        if(actualCell.isAntHill()) System.out.println("I'm in the anthill!");
         Cell nextCell = agent.getMap().nextCell(lastCell,actualCell); //Cell in front of the ant
         Cell endCell = new Cell();
 

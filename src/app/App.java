@@ -150,7 +150,7 @@ public class App {
         ArrayList<Agent> ants = new ArrayList<Agent>();
 
         for(int i = 0; i < nb; i++){
-            ants.add(new Ant(map, new Position(2,2), new OneStep(), new Sensors()));
+            ants.add(new Ant(map, new Position(3,1), new OneStep(), new Sensors()));
         }
         return ants;
     }
