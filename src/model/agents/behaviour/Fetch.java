@@ -4,7 +4,9 @@ import model.Position;
 import model.agents.Agent;
 import model.agents.mobileAgent.ant.Ant;
 import model.elements.Element;
+import model.elements.ElementType;
 import model.elements.Pheromone;
+import model.elements.Source;
 import model.map.Cell;
 import view.ErrorView;
 
@@ -59,8 +61,11 @@ public class Fetch implements Behaviour {
         Boolean source = false;
         for (int i = 0 ; i < movableCell.size(); i++){
             if (movableCell.get(i).isSource()){
-                source = true;
-                endCell = movableCell.get(i);
+                Source actualSource = (Source)(movableCell.get(i).getElements().get(ElementType.fromString("Source")).get(0));
+                if (actualSource.isUsable()){
+                    endCell = movableCell.get(i);
+                    source = true;
+                }
             }
             //System.out.println("Cellule "+ i + ": "+movableCell.get(i).getPosition().getX()+" ; "+movableCell.get(i).getPosition().getY());
         }

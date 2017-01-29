@@ -1,6 +1,8 @@
 package view;
 
 import model.Position;
+import model.elements.ElementType;
+import model.elements.Source;
 import model.map.Cell;
 import model.map.Map;
 
@@ -51,7 +53,14 @@ public class MapView {
                     System.out.print(ANSI_CYAN + "x" + ANSI_RESET);
                 }
                 else if (actualCell.isSource()){
-                    System.out.print(ANSI_GREEN + "o" + ANSI_RESET);
+                    Source actualSource = (Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0));
+                    if (actualSource.isUsable()){
+                        System.out.print(ANSI_GREEN + "o" + ANSI_RESET);
+                    }
+                    else{
+                        System.out.print(ANSI_PURPLE + "o" + ANSI_RESET);
+                    }
+
                 }
                 else if(actualCell.hasPheromone()){
 

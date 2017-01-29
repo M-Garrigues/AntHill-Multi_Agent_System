@@ -178,20 +178,28 @@ public class Map {
 
         return false;
     }
-    public void getSources (){
+    public int[] getSources (){
 
+        int[] counter = new int[2];
+        counter[0] = 0;
+        counter[1] = 0;
         for (int i = 0; i< sizeX; i++){
             for (int j = 0; j< sizeY; j++){
-
                 ArrayList<Cell> cellChecked = new ArrayList<Cell>();
                 Position actualPosition = new Position(i,j);
                 Cell actualCell = this.getCellPosition(actualPosition);
                 if (actualCell.isSource()){
+                    counter[1]++;
                     Source source = (Source)(actualCell.getElements().get(ElementType.fromString("Source")).get(0));
-                    System.out.println("Source fastest way :"+source.getFastway());
+                    if (source.getFastway() != 0){
+                        System.out.println("Source fastest way :"+source.getFastway());
+                        counter[0]++;
+                    }
                 }
             }
         }
+
+        return counter;
     }
 
     public void reducePheromone (){
@@ -201,7 +209,9 @@ public class Map {
                 Cell actualCell = this.getCellPosition(actualPosition);
                 if (actualCell.hasPheromone()){
                     int quantityPheromone = ((Pheromone)actualCell.getPheromone()).getQuantity();
-                    actualCell.setPheromone(quantityPheromone-1);
+                    if (quantityPheromone-1 == 0){
+                        actualCell.deleteElement((Pheromone)actualCell.getPheromone());
+                    }
                 }
             }
         }

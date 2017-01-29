@@ -4,6 +4,7 @@ import model.Position;
 import model.elements.Element;
 import model.elements.ElementType;
 import model.elements.Pheromone;
+import model.elements.Source;
 
 import java.util.EnumMap;
 import java.util.concurrent.locks.Lock;
@@ -276,8 +277,6 @@ public class Cell {
         }
         return null;
     }
-
-
 
     public EnumMap<ElementType, ElementList> getElements() {
 

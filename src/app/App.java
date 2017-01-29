@@ -28,14 +28,13 @@ public class App {
         System.out.println("Manger total : "+map.getFood());
         MapView view = new MapView(map);
 
-
         System.out.println(Thread.currentThread().getName());
 
         ArrayList<Agent> ants = createAnts(map, 100);
         int i = 0;
 
 
-        while(map.getAntHill().getFoodStack() < map.getFood() && i < 1000){
+        while(map.getAntHill().getFoodStack() < map.getFood() || i > 10000){
 
             System.out.println("\n\n ===== Boucle "+ i++ +" ===== \n\n");
             map.reducePheromone();
@@ -52,11 +51,11 @@ public class App {
         }
         System.out.println("Food collected: " + map.getAntHill().getFoodStack() + "/" + map.getFood());
 
-        map.getSources();
+        int[]sources = map.getSources();
+        System.out.println("Sources found : "+sources[0]+" on "+sources[1]);
 
         view.update(map);
         view.printMap();
-
 
         /*
         boolean test;
