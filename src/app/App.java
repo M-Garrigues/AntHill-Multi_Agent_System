@@ -31,7 +31,7 @@ public class App {
 
         System.out.println(Thread.currentThread().getName());
 
-        ArrayList<Agent> ants = createAnts(map, 4);
+        ArrayList<Agent> ants = createAnts(map, 1);
 
 
 

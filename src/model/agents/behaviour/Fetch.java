@@ -55,7 +55,7 @@ public class Fetch implements Behaviour {
                 source = true;
                 endCell = movableCell.get(i);
             }
-            System.out.println("Cellule 1:"+movableCell.get(i).getPosition().getX()+" : "+movableCell.get(i).getPosition().getY());
+            System.out.println("Cellule "+ i + ": "+movableCell.get(i).getPosition().getX()+" ; "+movableCell.get(i).getPosition().getY());
         }
         if (source == true){
             ant.getPath().add(endCell);
@@ -66,11 +66,10 @@ public class Fetch implements Behaviour {
         else {
             //Choose a new cell
 
-            /*if (movableCell.contains(lastCell)){
+            if (movableCell.contains(lastCell)){
                 movableCell.remove(lastCell);
-            }*/
+            }
 
-            System.out.println("ifelse");
 
             if (movableCell.isEmpty()) {
                 System.out.println("tableau vide");
@@ -79,37 +78,41 @@ public class Fetch implements Behaviour {
                 //If there is no possibility to move , go back
             } else {
 
-                System.out.println("ici");
                 System.out.println(movableCell.size());
                 // Probability for each possibleCell
                 for (int i = 0; i < movableCell.size(); i++) {
-                    System.out.println("la");
                     double probability;
                     int distance;
 
+
                     Cell cellCompare = movableCell.get(i);
 
-                    Position positionCompare = cellCompare.getPosition();
-                    Element pheromoneElement = cellCompare.getPheromone();
 
-                    Pheromone pheromone = (Pheromone) pheromoneElement;
+                    Position positionCompare = cellCompare.getPosition();
+
 
                     if (nextCell.getPosition().isEqual(positionCompare)) {
-                        System.out.println("lalalalala");
                         probability = 10; //orientation
-                        probability += pheromone.getQuantity(); //pheromone
+                        if (cellCompare.hasPheromone()) {
+                            Element pheromoneElement = cellCompare.getPheromone();
+                            Pheromone pheromone = (Pheromone) pheromoneElement;
+                            probability += pheromone.getQuantity(); //pheromone
 
-                    } else {
-                        System.out.println("xaxaxaxaxa");
+                        }
+                    }
+                    else {
                         distance = nextCell.distance(cellCompare);
-                        System.out.println("Distance :"+distance);
                         probability = 10 / (distance + 1); //orientation
-                        System.out.println("Pheromone :"+pheromone.getQuantity());
-                        probability += pheromone.getQuantity(); //pheromone
+                        if (cellCompare.hasPheromone()) {
+                            Element pheromoneElement = cellCompare.getPheromone();
+                            Pheromone pheromone = (Pheromone) pheromoneElement;
+                            probability += pheromone.getQuantity(); //pheromone
+
+                        }
+
                     }
 
                     probabilityArray.add(probability);
-                    System.out.println("proba ? : "+probability);
                 }
 
                 //Sum for all probability
@@ -124,17 +127,25 @@ public class Fetch implements Behaviour {
 
                 //Generating random number to chose next cell
                 double testProbability = Math.random();
+                System.out.println("Random : " +testProbability);
                 double cumulSum = 0;
+                int i = 0;
+                boolean newCell = true;
 
-                for (int i = 0; i < probabilityArray.size(); i++) {
+                while ((i < probabilityArray.size())&& newCell) {
 
                     cumulSum += probabilityArray.get(i) / sumProbability;
+                    System.out.println("Somme = " +cumulSum);
+                    System.out.println("Proba = " +testProbability);
 
                     if (testProbability <= cumulSum) {
-
+                        System.out.println("Je passe ici");
                         endCell = movableCell.get(i);
+                        newCell = false;
                     }
+                    i++;
                 }
+                System.out.println("Prochaine cellule : "+endCell.getPosition().getX()+" ; "+endCell.getPosition().getY());
 
                 ant.getPath().add(endCell);
                 ant.move(actualCell, endCell);
