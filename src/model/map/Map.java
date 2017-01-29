@@ -212,6 +212,9 @@ public class Map {
                     if (quantityPheromone-1 == 0){
                         actualCell.deleteElement((Pheromone)actualCell.getPheromone());
                     }
+                    else{
+                        ((Pheromone)actualCell.getPheromone()).setQuantity(quantityPheromone-1);
+                    }
                 }
             }
         }

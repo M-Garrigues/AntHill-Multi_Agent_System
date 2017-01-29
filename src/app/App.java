@@ -34,7 +34,7 @@ public class App {
         int i = 0;
 
 
-        while(map.getAntHill().getFoodStack() < map.getFood() || i > 10000){
+        while(map.getAntHill().getFoodStack() < map.getFood() && i < 1000){
 
             System.out.println("\n\n ===== Boucle "+ i++ +" ===== \n\n");
             map.reducePheromone();

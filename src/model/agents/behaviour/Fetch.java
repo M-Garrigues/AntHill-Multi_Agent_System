@@ -102,7 +102,7 @@ public class Fetch implements Behaviour {
 
 
                     if (nextCell.getPosition().isEqual(positionCompare)) {
-                        probability = 10; //orientation
+                        probability = 100; //orientation
                         if (cellCompare.hasPheromone()) {
                             Element pheromoneElement = cellCompare.getPheromone();
                             Pheromone pheromone = (Pheromone) pheromoneElement;
@@ -112,7 +112,7 @@ public class Fetch implements Behaviour {
                     }
                     else {
                         distance = nextCell.distance(cellCompare);
-                        probability = 10 / (distance + 1); //orientation
+                        probability = 100 / (distance*4); //orientation
                         if (cellCompare.hasPheromone()) {
                             Element pheromoneElement = cellCompare.getPheromone();
                             Pheromone pheromone = (Pheromone) pheromoneElement;
