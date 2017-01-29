@@ -147,6 +147,7 @@ public class Fetch implements Behaviour {
                 }
                 System.out.println("Prochaine cellule : "+endCell.getPosition().getX()+" ; "+endCell.getPosition().getY());
 
+                System.out.println("BITE" + ant.getPath());
                 ant.getPath().add(endCell);
                 ant.move(actualCell, endCell);
             }

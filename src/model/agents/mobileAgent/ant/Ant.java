@@ -37,6 +37,7 @@ public class Ant extends MobileAgent{
     public Ant(Map map, Position position, Movement movement, Vision vision){
         super(position, movement, vision);
         this.setMap(map);
+        this.path = new ArrayList<Cell>();
     }
 
 
